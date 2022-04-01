@@ -305,7 +305,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
 Version: 6.2.0
-Release: 5%{?rcrel}%{?dist}
+Release: 6%{?rcrel}%{?dist}
 Epoch: 2
 License: GPLv2 and BSD and MIT and CC-BY
 URL: http://www.qemu.org/
@@ -2294,6 +2294,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Fri Apr 01 2022 Richard W.M. Jones <rjones@redhat.com> - 2:6.2.0-6
+- Bump and rebuild for SONAME change in libmpathpersist (RHBZ#2069778)
+
 * Thu Feb 10 2022 Cole Robinson <crobinso@redhat.com> - 6.2.0-5
 - Split out qemu-virtiofsd subpackage
 
