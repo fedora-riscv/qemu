@@ -305,7 +305,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 1
+%global baserelease 2
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -1763,6 +1763,10 @@ mkdir -p %{static_buildroot}
 
 pushd %{static_builddir}
 make DESTDIR=%{static_buildroot} install
+
+# Duplicates what the main build installs and we don't
+# need second copy with a -static suffix
+rm -f %{static_buildroot}%{_bindir}/qemu-trace-stap
 popd  # static
 
 # Rename all QEMU user emulators to have a -static suffix
@@ -2318,6 +2322,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue May  3 2022 Daniel P. Berrangé <berrange@redhat.com> - 7.0.0-2
+- Drop redundant qemu-trace-stap copy from qemu-user-static (rhbz#2061584)
+
 * Fri Apr 08 2022 Eduardo Lima (Etrunko) <etrunko@redhat.com> - 7.0.0-1
 - Rebase to qemu 7.0.0-1
 
