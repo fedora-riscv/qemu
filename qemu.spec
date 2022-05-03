@@ -1773,6 +1773,10 @@ mkdir -p %{static_buildroot}
 
 pushd %{static_builddir}
 make DESTDIR=%{static_buildroot} install
+
+# Duplicates what the main build installs and we don't
+# need second copy with a -static suffix
+rm -f %{static_buildroot}%{_bindir}/qemu-trace-stap
 popd  # static
 
 # Rename all QEMU user emulators to have a -static suffix
