@@ -911,7 +911,6 @@ This package provides the user mode emulation of qemu targets
 %if %{user_static}
 %package user-static
 Summary: QEMU user mode emulation of qemu targets static build
-Requires: %{name}-common = %{epoch}:%{version}-%{release}
 Requires(post): systemd-units
 Requires(postun): systemd-units
 # qemu-user-binfmt + qemu-user-static both provide binfmt rules
@@ -2120,6 +2119,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 %if %{user_static}
 %files user-static
+%license COPYING COPYING.LIB LICENSE
 # Just use wildcard matches here: we will catch any new/missing files
 # in the qemu-user filelists
 %{_exec_prefix}/lib/binfmt.d/qemu-*-static.conf
@@ -2324,6 +2324,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %changelog
 * Tue May  3 2022 Daniel P. Berrangé <berrange@redhat.com> - 7.0.0-2
 - Drop redundant qemu-trace-stap copy from qemu-user-static (rhbz#2061584)
+- Remove qemu-common dep from qemu-user-static (rhbz#2061584)
 
 * Fri Apr 08 2022 Eduardo Lima (Etrunko) <etrunko@redhat.com> - 7.0.0-1
 - Rebase to qemu 7.0.0-1
