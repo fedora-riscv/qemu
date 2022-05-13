@@ -302,7 +302,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 10
+%global baserelease 9
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -343,11 +343,6 @@ Patch0005: 0001-acpi-fix-QEMU-crash-when-started-with-SLIC-table.patch
 # Fix for s390x emulation breaking Python
 # https://bugzilla.redhat.com/show_bug.cgi?id=2080519
 Patch0006: 0001-accel-tcg-Fix-cpu_ldq_be_mmu-typo.patch
-
-# Further fix for SLIC table
-# https://bugzilla.redhat.com/show_bug.cgi?id=2020186
-# https://gitlab.com/qemu-project/qemu/-/commit/748c030f360a940fe0c9382c8ca1649096c3a80d
-Patch0007: 0001-acpi-fix-OEM-ID-OEM-Table-ID-padding.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2314,9 +2309,6 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
-* Thu May 12 2022 Richard W.M. Jones <rjones@redhat.com> - 2:6.2.0-10
-- Add further fix for SLIC table parsing (RHBZ#2020186)
-
 * Thu May 05 2022 Richard W.M. Jones <rjones@redhat.com> - 2:6.2.0-9
 - Fix for s390x emulation breaking Python (RHBZ#2080519)
 
