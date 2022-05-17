@@ -215,6 +215,7 @@
 %define requires_device_display_virtio_gpu_ccw Requires: %{name}-device-display-virtio-gpu-ccw = %{evr}
 %define requires_device_display_virtio_vga Requires: %{name}-device-display-virtio-vga = %{evr}
 %define requires_device_display_virtio_vga_gl Requires: %{name}-device-display-virtio-vga-gl = %{evr}
+%define requires_package_qemu_pr_helper Requires: qemu-pr-helper
 %define requires_package_virtiofsd Requires: vhostuser-backend(fs)
 
 %if %{have_virgl}
@@ -285,6 +286,7 @@
 %{requires_device_usb_host} \
 %{requires_device_usb_redirect} \
 %{requires_device_usb_smartcard} \
+%{requires_package_qemu_pr_helper} \
 %{requires_package_virtiofsd} \
 
 # Modules which can be conditionally built
@@ -505,7 +507,6 @@ Requires: %{name}-system-x86 = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-xtensa = %{epoch}:%{version}-%{release}
 Requires: %{name}-img = %{epoch}:%{version}-%{release}
 Requires: %{name}-tools = %{epoch}:%{version}-%{release}
-Requires: qemu-pr-helper = %{epoch}:%{version}-%{release}
 
 
 %description
