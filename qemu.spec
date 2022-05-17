@@ -306,7 +306,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 9
+%global baserelease 10
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -2325,6 +2325,12 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue May 17 2022 Cole Robinson <crobinso@redhat.com> - 2:6.2.0-10
+- Make qemu-common own /usr/share/qemu/vhost-user (bz 2086836)
+- Add virtiofsd to qemu-system-* deps (bz 2083155)
+- Add qemu-pr-helper to qemu-system-* deps
+- Fix ACPI SLIC table passthrough (bz 2020186)
+
 * Thu May 05 2022 Richard W.M. Jones <rjones@redhat.com> - 2:6.2.0-9
 - Fix for s390x emulation breaking Python (RHBZ#2080519)
 
