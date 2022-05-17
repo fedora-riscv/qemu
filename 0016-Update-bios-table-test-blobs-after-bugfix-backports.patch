@@ -1,0 +1,51 @@
+From 11902ed45f0ca9643f656dba4d630d276080ead2 Mon Sep 17 00:00:00 2001
+From: Cole Robinson <crobinso@redhat.com>
+Date: Tue, 17 May 2022 15:19:02 -0400
+Subject: [PATCH] Update bios-table-test blobs after bugfix backports
+Content-type: text/plain
+
+Signed-off-by: Cole Robinson <crobinso@redhat.com>
+---
+ tests/data/acpi/pc/SSDT.dimmpxm             | Bin 734 -> 734 bytes
+ tests/data/acpi/q35/SSDT.dimmpxm            | Bin 734 -> 734 bytes
+ tests/data/acpi/virt/SSDT.memhp             | Bin 736 -> 736 bytes
+ tests/qtest/bios-tables-test-allowed-diff.h |   4 ----
+ 4 files changed, 4 deletions(-)
+
+diff --git a/tests/data/acpi/pc/SSDT.dimmpxm b/tests/data/acpi/pc/SSDT.dimmpxm
+index a50a961fa1d9b0dd8ea4096d652c83bcf04db20b..ac55387d57e48adb99eb738a102308688a262fb8 100644
+GIT binary patch
+delta 33
+ocmcb|dXH5iIM^lR9uortW0;e_vq!LkUzm%huP+0`Mu}rg0HzrUKL7v#
+
+delta 33
+ocmcb|dXH5iIM^lR9uortqnMMwvq!LkUzm%hudjl_Mu}rg0HV1GKL7v#
+
+diff --git a/tests/data/acpi/q35/SSDT.dimmpxm b/tests/data/acpi/q35/SSDT.dimmpxm
+index 617a1c911c7d6753bcedc8ecc52e3027a5259ad6..98e6f0e3f3bb02dd419e36bdd1db9b94c728c406 100644
+GIT binary patch
+delta 33
+ocmcb|dXH5iIM^lR9uortqnnezvq!LkUzm%huP+0`Mu}rg0Ho;&F8}}l
+
+delta 33
+ocmcb|dXH5iIM^lR9uortBb$@Ivq!LkUzm%hudjl_Mu}rg0HKKqF8}}l
+
+diff --git a/tests/data/acpi/virt/SSDT.memhp b/tests/data/acpi/virt/SSDT.memhp
+index e8b850ae2239d8f496b12de672c2a1268e2f269d..375d7b6fc85a484f492a26ccd355c205f2c34473 100644
+GIT binary patch
+delta 33
+ocmaFB`hZm;IM^lR0TTlQqrH>Avq!LkUzm%huP+0`Mu`(l0HqiSFaQ7m
+
+delta 33
+ocmaFB`hZm;IM^lR0TTlQ<9{cAXOCb7zc3e1Uta}<jS?rA0JOLYFaQ7m
+
+diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+index 7faa8f53be..dfb8523c8b 100644
+--- a/tests/qtest/bios-tables-test-allowed-diff.h
++++ b/tests/qtest/bios-tables-test-allowed-diff.h
+@@ -1,5 +1 @@
+ /* List of comma-separated changed AML files to ignore */
+-"tests/data/acpi/virt/SSDT.memhp",
+-"tests/data/acpi/pc/SSDT.dimmpxm",
+-"tests/data/acpi/q35/SSDT.dimmpxm",
+-"tests/data/acpi/q35/FACP.slic",

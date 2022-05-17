@@ -1,0 +1,38 @@
+From 83a99be0e3ae93df84f7cd20ac9f6495cc9d0c63 Mon Sep 17 00:00:00 2001
+From: Igor Mammedov <imammedo@redhat.com>
+Date: Wed, 12 Jan 2022 08:03:30 -0500
+Subject: [PATCH] tests: acpi: whitelist nvdimm's SSDT and FACP.slic expected
+ blobs
+Content-type: text/plain
+
+The next commit will revert OEM fields whitespace padding to
+padding with '\0' as it was before [1]. That will change OEM
+Table ID for:
+  * SSDT.*: where it was padded from 6 characters to 8
+  * FACP.slic: where it was padded from 2 characters to 8
+after reverting whitespace padding, it will be replaced with
+'\0' which effectively will shorten OEM table ID to 6 and 2
+characters.
+
+Whitelist affected tables before introducing the change.
+
+1) 602b458201 ("acpi: Permit OEM ID and OEM table ID fields to be changed")
+Signed-off-by: Igor Mammedov <imammedo@redhat.com>
+Message-Id: <20220112130332.1648664-3-imammedo@redhat.com>
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+(cherry picked from commit d1e4a4654154925eddf0fc449fa9c92b806b9c8c)
+---
+ tests/qtest/bios-tables-test-allowed-diff.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/tests/qtest/bios-tables-test-allowed-diff.h b/tests/qtest/bios-tables-test-allowed-diff.h
+index dfb8523c8b..7faa8f53be 100644
+--- a/tests/qtest/bios-tables-test-allowed-diff.h
++++ b/tests/qtest/bios-tables-test-allowed-diff.h
+@@ -1 +1,5 @@
+ /* List of comma-separated changed AML files to ignore */
++"tests/data/acpi/virt/SSDT.memhp",
++"tests/data/acpi/pc/SSDT.dimmpxm",
++"tests/data/acpi/q35/SSDT.dimmpxm",
++"tests/data/acpi/q35/FACP.slic",

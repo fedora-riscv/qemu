@@ -348,6 +348,17 @@ Patch0005: 0001-acpi-fix-QEMU-crash-when-started-with-SLIC-table.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2080519
 Patch0006: 0001-accel-tcg-Fix-cpu_ldq_be_mmu-typo.patch
 
+# Fix slic table usage
+# https://bugzilla.redhat.com/show_bug.cgi?id=2020186
+Patch0010: 0010-tests-acpi-manually-pad-OEM_ID-OEM_TABLE_ID-for-test.patch
+Patch0011: 0011-tests-acpi-whitelist-nvdimm-s-SSDT-and-FACP.slic-exp.patch
+Patch0012: 0012-acpi-fix-OEM-ID-OEM-Table-ID-padding.patch
+Patch0013: 0013-tests-acpi-test-short-OEM_ID-OEM_TABLE_ID-values-in-.patch
+Patch0014: 0014-block-qdict-Fix-Werror-maybe-uninitialized-build-fai.patch
+Patch0015: 0015-hw-i386-amd_iommu-Fix-maybe-uninitialized-error-with.patch
+Patch0016: 0016-Update-bios-table-test-blobs-after-bugfix-backports.patch
+
+
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
 BuildRequires: glib2-devel
@@ -419,6 +430,8 @@ BuildRequires: clang
 BuildRequires: gcc
 %endif
 BuildRequires: make
+# For autosetup git_am
+BuildRequires: git
 # -display sdl support
 BuildRequires: SDL2-devel
 # pulseaudio audio output
@@ -1236,7 +1249,7 @@ This package provides the QEMU system emulator for Xtensa boards.
 
 %prep
 %setup -q -n qemu-%{version}%{?rcstr}
-%autopatch -p1
+%autosetup -S git_am
 
 %global qemu_kvm_build qemu_kvm_build
 mkdir -p %{qemu_kvm_build}
