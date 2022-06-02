@@ -278,6 +278,7 @@
 %{requires_device_display_qxl} \
 %{requires_device_display_vhost_user_gpu} \
 %{requires_device_display_virtio_gpu} \
+%{requires_device_display_virtio_gpu_ccw} \
 %{requires_device_display_virtio_gpu_gl} \
 %{requires_device_display_virtio_gpu_pci} \
 %{requires_device_display_virtio_gpu_pci_gl} \
