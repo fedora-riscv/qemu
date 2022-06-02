@@ -310,7 +310,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 3
+%global baserelease 4
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -333,7 +333,15 @@ Source30: kvm-s390x.conf
 Source31: kvm-x86.conf
 Source36: README.tests
 
-Patch0001: 0001-sgx-stub-fix.patch
+# Fix SGX assert
+Patch0001: 0001-target-i386-the-sgx_epc_get_section-stub-is-reachabl.patch
+# Fix virtio-scsi hang (bz #2079347)
+Patch0002: 0002-virtio-scsi-fix-ctrl-and-event-handler-functions-in-.patch
+Patch0003: 0003-virtio-scsi-don-t-waste-CPU-polling-the-event-virtqu.patch
+Patch0004: 0004-virtio-scsi-clean-up-virtio_scsi_handle_event_vq.patch
+Patch0005: 0005-virtio-scsi-clean-up-virtio_scsi_handle_ctrl_vq.patch
+Patch0006: 0006-virtio-scsi-clean-up-virtio_scsi_handle_cmd_vq.patch
+Patch0007: 0007-virtio-scsi-move-request-related-items-from-.h-to-.c.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2326,6 +2334,10 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Thu Jun 02 2022 Cole Robinson <crobinso@redhat.com> - 7.0.0-4
+- Fix virtio-scsi hang (bz #2079347)
+- Add dep on virtio-gpu-ccw (bz #2091964)
+
 * Tue May 17 2022 Cole Robinson <crobinso@redhat.com> - 7.0.0-3
 - Make qemu-common own /usr/share/qemu/vhost-user (bz 2086836)
 - Add virtiofsd to qemu-system-* deps (bz 2083155)
