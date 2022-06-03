@@ -108,6 +108,12 @@
 %global have_jack 0
 %endif
 
+%global have_dbus_display 1
+%if %{defined rhel} && 0%{?rhel} < 9
+# RHEL/Centos 8 glib is not new enough
+%global have_dbus_display 0
+%endif
+
 %global have_sdl_image %{defined fedora}
 %global have_fdt 1
 %global have_opengl 1
@@ -195,7 +201,6 @@
 %endif
 %define requires_block_ssh Requires: %{name}-block-ssh = %{evr}
 %define requires_audio_alsa Requires: %{name}-audio-alsa = %{evr}
-%define requires_audio_dbus Requires: %{name}-audio-dbus = %{evr}
 %define requires_audio_oss Requires: %{name}-audio-oss = %{evr}
 %define requires_audio_pa Requires: %{name}-audio-pa = %{evr}
 %define requires_audio_sdl Requires: %{name}-audio-sdl = %{evr}
@@ -203,7 +208,6 @@
 %define requires_device_usb_host Requires: %{name}-device-usb-host = %{evr}
 %define requires_device_usb_redirect Requires: %{name}-device-usb-redirect = %{evr}
 %define requires_ui_curses Requires: %{name}-ui-curses = %{evr}
-%define requires_ui_dbus Requires: %{name}-ui-dbus = %{evr}
 %define requires_ui_gtk Requires: %{name}-ui-gtk = %{evr}
 %define requires_ui_sdl Requires: %{name}-ui-sdl = %{evr}
 %define requires_ui_egl_headless Requires: %{name}-ui-egl-headless = %{evr}
@@ -229,6 +233,14 @@
 %define requires_audio_jack Requires: %{name}-audio-jack = %{evr}
 %else
 %define requires_audio_jack %{nil}
+%endif
+
+%if %{have_dbus_display}
+%define requires_audio_dbus Requires: %{name}-audio-dbus = %{evr}
+%define requires_ui_dbus Requires: %{name}-ui-dbus = %{evr}
+%else
+%define requires_audio_dbus %{nil}
+%define requires_ui_dbus %{nil}
 %endif
 
 %if %{have_spice}
@@ -696,11 +708,13 @@ Requires: %{name}-common%{?_isa} = %{epoch}:%{version}-%{release}
 %description audio-alsa
 This package provides the additional ALSA audio driver for QEMU.
 
+%if %{have_dbus_display}
 %package  audio-dbus
 Summary: QEMU D-Bus audio driver
 Requires: %{name}-common%{?_isa} = %{epoch}:%{version}-%{release}
 %description audio-dbus
 This package provides the additional D-Bus audio driver for QEMU.
+%endif
 
 %package  audio-oss
 Summary: QEMU OSS audio driver
@@ -735,11 +749,13 @@ Requires: %{name}-common%{?_isa} = %{epoch}:%{version}-%{release}
 %description ui-curses
 This package provides the additional curses UI for QEMU.
 
+%if %{have_dbus_display}
 %package  ui-dbus
 Summary: QEMU D-Bus UI driver
 Requires: %{name}-common%{?_isa} = %{epoch}:%{version}-%{release}
 %description ui-dbus
 This package provides the additional D-Bus UI for QEMU.
+%endif
 
 %package  ui-gtk
 Summary: QEMU GTK UI driver
@@ -1989,8 +2005,10 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 %files audio-alsa
 %{_libdir}/%{name}/audio-alsa.so
+%if %{have_dbus_display}
 %files audio-dbus
 %{_libdir}/%{name}/audio-dbus.so
+%endif
 %files audio-oss
 %{_libdir}/%{name}/audio-oss.so
 %files audio-pa
@@ -2005,8 +2023,10 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 %files ui-curses
 %{_libdir}/%{name}/ui-curses.so
+%if %{have_dbus_display}
 %files ui-dbus
 %{_libdir}/%{name}/ui-dbus.so
+%endif
 %files ui-gtk
 %{_libdir}/%{name}/ui-gtk.so
 %files ui-sdl
