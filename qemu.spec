@@ -1447,7 +1447,9 @@ run_configure \
   --enable-gnutls \
   --enable-guest-agent \
   --enable-iconv \
+%if %{have_jack}
   --enable-jack \
+%endif
   --enable-kvm \
   --enable-l2tpv3 \
   --enable-libiscsi \
