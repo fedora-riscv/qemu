@@ -1268,6 +1268,7 @@ mkdir -p %{static_builddir}
 %build
 %define disable_everything         \\\
   --audio-drv-list=                \\\
+  --disable-alsa                   \\\
   --disable-attr                   \\\
   --disable-auth-pam               \\\
   --disable-avx2                   \\\
@@ -1289,6 +1290,7 @@ mkdir -p %{static_builddir}
   --disable-crypto-afalg           \\\
   --disable-curl                   \\\
   --disable-curses                 \\\
+  --disable-dbus-display           \\\
   --disable-debug-info             \\\
   --disable-debug-mutex            \\\
   --disable-debug-tcg              \\\
@@ -1445,6 +1447,7 @@ run_configure \
 %if %{defined block_drivers_ro_list}
   --block-drv-ro-whitelist=%{block_drivers_ro_list} \
 %endif
+  --enable-alsa \
   --enable-attr \
 %ifarch %{ix86} x86_64
   --enable-avx2 \
@@ -1454,6 +1457,9 @@ run_configure \
   --enable-capstone=auto \
   --enable-coroutine-pool \
   --enable-curl \
+%if %{have_dbus_display}
+  --enable-dbus-display \
+%endif
   --enable-debug-info \
   --enable-docs \
 %if %{have_fdt}
