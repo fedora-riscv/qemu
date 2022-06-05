@@ -1,0 +1,32 @@
+From: Cole Robinson <crobinso@redhat.com>
+Date: Sat, 4 Jun 2022 20:29:46 -0400
+Subject: [PATCH] Fix iotests with modules and qemu-system-s390x
+Content-type: text/plain
+
+Signed-off-by: Cole Robinson <crobinso@redhat.com>
+---
+ tests/qemu-iotests/common.rc | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/tests/qemu-iotests/common.rc b/tests/qemu-iotests/common.rc
+index 227e0a5be9..97f8e0a15f 100644
+--- a/tests/qemu-iotests/common.rc
++++ b/tests/qemu-iotests/common.rc
+@@ -975,7 +975,7 @@ _require_large_file()
+ #
+ _require_devices()
+ {
+-    available=$($QEMU -M none -device help | \
++    available=$($QEMU -M none -device help 2> /dev/null | \
+                 grep ^name | sed -e 's/^name "//' -e 's/".*$//')
+     for device
+     do
+@@ -987,7 +987,7 @@ _require_devices()
+ 
+ _require_one_device_of()
+ {
+-    available=$($QEMU -M none -device help | \
++    available=$($QEMU -M none -device help 2> /dev/null | \
+                 grep ^name | sed -e 's/^name "//' -e 's/".*$//')
+     for device
+     do
