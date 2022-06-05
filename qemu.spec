@@ -356,6 +356,7 @@ Patch0006: 0006-virtio-scsi-clean-up-virtio_scsi_handle_cmd_vq.patch
 Patch0007: 0007-virtio-scsi-move-request-related-items-from-.h-to-.c.patch
 Patch0008: 0008-Disable-flakey-dbus-display-test.patch
 Patch0009: 0009-Fix-iotests-with-modules-and-qemu-system-s390x.patch
+Patch0010: 0010-Skip-iotests-entirely.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel

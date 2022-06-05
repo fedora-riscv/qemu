@@ -6,7 +6,7 @@ Content-type: text/plain
 Signed-off-by: Cole Robinson <crobinso@redhat.com>
 ---
  tests/qemu-iotests/common.rc | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/tests/qemu-iotests/common.rc b/tests/qemu-iotests/common.rc
 index 227e0a5be9..97f8e0a15f 100644
