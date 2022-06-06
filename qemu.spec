@@ -938,10 +938,137 @@ Requires(postun): systemd-units
 # https://pagure.io/fedora-ci/general/issue/184
 #Conflicts: qemu-user-binfmt
 #Provides: qemu-user-binfmt
+Requires: qemu-user-static-aarch64
+Requires: qemu-user-static-alpha
+Requires: qemu-user-static-arm
+Requires: qemu-user-static-cris
+Requires: qemu-user-static-hexagon
+Requires: qemu-user-static-hppa
+Requires: qemu-user-static-m68k
+Requires: qemu-user-static-microblaze
+Requires: qemu-user-static-mips
+Requires: qemu-user-static-nios2
+Requires: qemu-user-static-or1k
+Requires: qemu-user-static-ppc
+Requires: qemu-user-static-riscv
+Requires: qemu-user-static-s390x
+Requires: qemu-user-static-sh4
+Requires: qemu-user-static-sparc
+Requires: qemu-user-static-x86
+Requires: qemu-user-static-xtensa
+
 %description user-static
 This package provides the user mode emulation of qemu targets built as
 static binaries
+
+%package user-static-aarch64
+Summary: QEMU user mode emulation of aarch64 qemu targets static build
+%description user-static-aarch64
+This package provides the aarch64 user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-alpha
+Summary: QEMU user mode emulation of alpha qemu targets static build
+%description user-static-alpha
+This package provides the alpha user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-arm
+Summary: QEMU user mode emulation of arm qemu targets static build
+%description user-static-arm
+This package provides the arm user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-cris
+Summary: QEMU user mode emulation of cris qemu targets static build
+%description user-static-cris
+This package provides the cris user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-hexagon
+Summary: QEMU user mode emulation of hexagon qemu targets static build
+%description user-static-hexagon
+This package provides the hexagon user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-hppa
+Summary: QEMU user mode emulation of hppa qemu targets static build
+%description user-static-hppa
+This package provides the hppa user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-m68k
+Summary: QEMU user mode emulation of m68k qemu targets static build
+%description user-static-m68k
+This package provides the m68k user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-microblaze
+Summary: QEMU user mode emulation of microblaze qemu targets static build
+%description user-static-microblaze
+This package provides the microblaze user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-mips
+Summary: QEMU user mode emulation of mips qemu targets static build
+%description user-static-mips
+This package provides the mips user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-nios2
+Summary: QEMU user mode emulation of nios2 qemu targets static build
+%description user-static-nios2
+This package provides the nios2 user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-or1k
+Summary: QEMU user mode emulation of or1k qemu targets static build
+%description user-static-or1k
+This package provides the or1k user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-ppc
+Summary: QEMU user mode emulation of ppc qemu targets static build
+%description user-static-ppc
+This package provides the ppc user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-riscv
+Summary: QEMU user mode emulation of riscv qemu targets static build
+%description user-static-riscv
+This package provides the riscv user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-s390x
+Summary: QEMU user mode emulation of s390x qemu targets static build
+%description user-static-s390x
+This package provides the s390x user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-sh4
+Summary: QEMU user mode emulation of sh4 qemu targets static build
+%description user-static-sh4
+This package provides the sh4 user mode emulation of qemu targets built as
+static binaries
 %endif
+
+%package user-static-sparc
+Summary: QEMU user mode emulation of sparc qemu targets static build
+%description user-static-sparc
+This package provides the sparc user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-x86
+Summary: QEMU user mode emulation of x86 qemu targets static build
+%description user-static-x86
+This package provides the x86 user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-xtensa
+Summary: QEMU user mode emulation of xtensa qemu targets static build
+%description user-static-xtensa
+This package provides the xtensa user mode emulation of qemu targets built as
+static binaries
 
 
 %package system-aarch64
@@ -1853,11 +1980,97 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 /bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
 
 %if %{user_static}
-%post user-static
+%post user-static-aarch64
 /bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
-%postun user-static
+%postun user-static-aarch64
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-alpha
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-alpha
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-arm
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-arm
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-cris
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-cris
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-hexagon
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-hexagon
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-hppa
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-hppa
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-m68k
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-m68k
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-microblaze
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-microblaze
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-mips
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-mips
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-nios2
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-nios2
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-or1k
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-or1k
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-ppc
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-ppc
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-riscv
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-riscv
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-s390x
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-s390x
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-sh4
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-sh4
 /bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
 %endif
+
+%post user-static-sparc
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-sparc
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-x86
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-x86
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
+%post user-static-xtensa
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-xtensa
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
 # endif !tools_only
 %endif
 
@@ -2127,11 +2340,140 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %if %{user_static}
 %files user-static
 %license COPYING COPYING.LIB LICENSE
-# Just use wildcard matches here: we will catch any new/missing files
-# in the qemu-user filelists
-%{_exec_prefix}/lib/binfmt.d/qemu-*-static.conf
-%{_bindir}/qemu-*-static
-%{_datadir}/systemtap/tapset/qemu-*-static.stp
+
+%files user-static-aarch64
+%{_bindir}/qemu-aarch64-static
+%{_bindir}/qemu-aarch64_be-static
+%{_datadir}/systemtap/tapset/qemu-aarch64.stp
+%{_datadir}/systemtap/tapset/qemu-aarch64_be-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-aarch64-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-aarch64_be-static.conf
+
+%files user-static-alpha
+%{_bindir}/qemu-alpha-static
+%{_datadir}/systemtap/tapset/qemu-alpha-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-alpha-static.conf
+
+%files user-static-arm
+%{_bindir}/qemu-arm-static
+%{_bindir}/qemu-armeb-static
+%{_datadir}/systemtap/tapset/qemu-armeb-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-arm-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-armeb-static.conf
+
+%files user-static-cris
+%{_bindir}/qemu-cris-static
+%{_datadir}/systemtap/tapset/qemu-cris-static.stp
+
+%files user-static-hexagon
+%{_bindir}/qemu-hexagon-static
+%{_datadir}/systemtap/tapset/qemu-hexagon-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-hexagon-static.conf
+
+%files user-static-hppa
+%{_bindir}/qemu-hppa-static
+%{_datadir}/systemtap/tapset/qemu-hppa-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-hppa-static.conf
+
+%files user-static-m68k
+%{_bindir}/qemu-m68k-static
+%{_datadir}/systemtap/tapset/qemu-m68k-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-m68k-static.conf
+
+%files user-static-microblaze
+%{_bindir}/qemu-microblaze-static
+%{_bindir}/qemu-microblazeel-static
+%{_datadir}/systemtap/tapset/qemu-microblaze-static.stp
+%{_datadir}/systemtap/tapset/qemu-microblazeel-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-microblaze-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-microblazeel-static.conf
+
+%files user-static-mips
+%{_bindir}/qemu-mips-static
+%{_bindir}/qemu-mips64-static
+%{_bindir}/qemu-mips64el-static
+%{_bindir}/qemu-mipsel-static
+%{_bindir}/qemu-mipsn32-static
+%{_bindir}/qemu-mipsn32el-static
+%{_datadir}/systemtap/tapset/qemu-mips-static.stp
+%{_datadir}/systemtap/tapset/qemu-mips64-static.stp
+%{_datadir}/systemtap/tapset/qemu-mips64el-static.stp
+%{_datadir}/systemtap/tapset/qemu-mipsel-static.stp
+%{_datadir}/systemtap/tapset/qemu-mipsn32-static.stp
+%{_datadir}/systemtap/tapset/qemu-mipsn32el-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-mips-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-mips64-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-mips64el-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-mipsel-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-mipsn32-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-mipsn32el-static.conf
+
+%files user-static-nios2
+%{_bindir}/qemu-nios2-static
+%{_datadir}/systemtap/tapset/qemu-nios2-static.stp
+
+%files user-static-or1k
+%{_bindir}/qemu-or1k-static
+%{_datadir}/systemtap/tapset/qemu-or1k-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-or1k-static.conf
+
+%files user-static-ppc
+%{_bindir}/qemu-ppc-static
+%{_bindir}/qemu-ppc64-static
+%{_bindir}/qemu-ppc64le-static
+%{_datadir}/systemtap/tapset/qemu-ppc-static.stp
+%{_datadir}/systemtap/tapset/qemu-ppc64-static.stp
+%{_datadir}/systemtap/tapset/qemu-ppc64le-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-ppc-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-ppc64-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-ppc64le-static.conf
+
+%files user-static-riscv
+%{_bindir}/qemu-riscv32-static
+%{_bindir}/qemu-riscv64-static
+%{_datadir}/systemtap/tapset/qemu-riscv32-static.stp
+%{_datadir}/systemtap/tapset/qemu-riscv64-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-riscv32-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-riscv64-static.conf
+
+%files user-static-s390x
+%{_bindir}/qemu-s390x-static
+%{_datadir}/systemtap/tapset/qemu-s390x-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-s390x-static.conf
+
+%files user-static-sh4
+%{_bindir}/qemu-sh4-static
+%{_bindir}/qemu-sh4eb-static
+%{_datadir}/systemtap/tapset/qemu-sh4-static.stp
+%{_datadir}/systemtap/tapset/qemu-sh4eb-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-sh4-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-sh4eb-static.conf
+
+%files user-static-sparc
+%{_bindir}/qemu-sparc-static
+%{_bindir}/qemu-sparc32plus-static
+%{_bindir}/qemu-sparc64-static
+%{_datadir}/systemtap/tapset/qemu-sparc-static.stp
+%{_datadir}/systemtap/tapset/qemu-sparc32plus-static.stp
+%{_datadir}/systemtap/tapset/qemu-sparc64-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-sparc-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-sparc32plus-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-sparc64-static.conf
+
+%files user-static-x86
+%{_bindir}/qemu-i386-static
+%{_bindir}/qemu-x86_64-static
+%{_datadir}/systemtap/tapset/qemu-i386-static.stp
+%{_datadir}/systemtap/tapset/qemu-x86_64-static.stp
+
+%files user-static-xtensa
+%{_bindir}/qemu-xtensa-static
+%{_bindir}/qemu-xtensaeb-static
+%{_datadir}/systemtap/tapset/qemu-xtensa-static.stp
+%{_datadir}/systemtap/tapset/qemu-xtensaeb-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-xtensa-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-xtensaeb-static.conf
+
 %endif
 
 
