@@ -165,11 +165,6 @@
 # https://bugzilla.redhat.com/show_bug.cgi?id=1952483
 %global _lto_cflags %{nil}
 
-# OOM killer breaks builds with parallel make on s390(x)
-%ifarch s390x
-%global _smp_mflags %{nil}
-%endif
-
 %global firmwaredirs "%{_datadir}/qemu-firmware:%{_datadir}/ipxe/qemu:%{_datadir}/seavgabios:%{_datadir}/seabios:%{_datadir}/sgabios"
 
 %global qemudocdir %{_docdir}/%{name}
