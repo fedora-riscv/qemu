@@ -502,7 +502,7 @@ BuildRequires: daxctl-devel
 BuildRequires: fuse-devel
 %if %{have_jack}
 # jack audio driver
-BuildRequires: jack-audio-connection-kit-devel
+BuildRequires: (pipewire-jack-audio-connection-kit-devel or jack-audio-connection-kit-devel)
 %endif
 BuildRequires: fuse3-devel
 %if %{have_sdl_image}
