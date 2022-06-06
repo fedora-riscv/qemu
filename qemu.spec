@@ -2346,7 +2346,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-aarch64_be-static
 %{_datadir}/systemtap/tapset/qemu-aarch64.stp
 %{_datadir}/systemtap/tapset/qemu-aarch64_be-static.stp
+%ifnarch aarch64
 %{_exec_prefix}/lib/binfmt.d/qemu-aarch64-static.conf
+%endif
 %{_exec_prefix}/lib/binfmt.d/qemu-aarch64_be-static.conf
 
 %files user-static-alpha
@@ -2358,7 +2360,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-arm-static
 %{_bindir}/qemu-armeb-static
 %{_datadir}/systemtap/tapset/qemu-armeb-static.stp
+%ifnarch aarch64
 %{_exec_prefix}/lib/binfmt.d/qemu-arm-static.conf
+%endif
 %{_exec_prefix}/lib/binfmt.d/qemu-armeb-static.conf
 
 %files user-static-cris
@@ -2426,7 +2430,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_datadir}/systemtap/tapset/qemu-ppc64le-static.stp
 %{_exec_prefix}/lib/binfmt.d/qemu-ppc-static.conf
 %{_exec_prefix}/lib/binfmt.d/qemu-ppc64-static.conf
+%ifnarch ppc64le
 %{_exec_prefix}/lib/binfmt.d/qemu-ppc64le-static.conf
+%endif
 
 %files user-static-riscv
 %{_bindir}/qemu-riscv32-static
@@ -2434,12 +2440,16 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_datadir}/systemtap/tapset/qemu-riscv32-static.stp
 %{_datadir}/systemtap/tapset/qemu-riscv64-static.stp
 %{_exec_prefix}/lib/binfmt.d/qemu-riscv32-static.conf
+%ifnarch riscv64
 %{_exec_prefix}/lib/binfmt.d/qemu-riscv64-static.conf
+%endif
 
 %files user-static-s390x
 %{_bindir}/qemu-s390x-static
 %{_datadir}/systemtap/tapset/qemu-s390x-static.stp
+%ifnarch s390x
 %{_exec_prefix}/lib/binfmt.d/qemu-s390x-static.conf
+%endif
 
 %files user-static-sh4
 %{_bindir}/qemu-sh4-static
@@ -2465,6 +2475,11 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-x86_64-static
 %{_datadir}/systemtap/tapset/qemu-i386-static.stp
 %{_datadir}/systemtap/tapset/qemu-x86_64-static.stp
+%ifnarch %{ix86} x86_64
+%{_exec_prefix}/lib/binfmt.d/qemu-i386-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-i486-static.conf
+%{_exec_prefix}/lib/binfmt.d/qemu-x86_64-static.conf
+%endif
 
 %files user-static-xtensa
 %{_bindir}/qemu-xtensa-static
