@@ -424,6 +424,8 @@ BuildRequires: clang
 BuildRequires: gcc
 %endif
 BuildRequires: make
+# For autosetup git_am
+BuildRequires: git
 # -display sdl support
 BuildRequires: SDL2-devel
 # pulseaudio audio output
@@ -1381,7 +1383,7 @@ This package provides the QEMU system emulator for Xtensa boards.
 
 %prep
 %setup -q -n qemu-%{version}%{?rcstr}
-%autopatch -p1
+%autosetup -S git_am
 
 %global qemu_kvm_build qemu_kvm_build
 mkdir -p %{qemu_kvm_build}
