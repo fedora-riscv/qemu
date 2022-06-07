@@ -306,7 +306,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 10
+%global baserelease 11
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -2686,6 +2686,11 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue Jun 07 2022 Cole Robinson <crobinso@redhat.com> - 2:6.2.0-11
+- Split qemu-user-static into per-arch subpackages (bz 2061584)
+- Drop redundant qemu-trace-stap copy from qemu-user-static (rhbz#2061584)
+- Remove qemu-common dep from qemu-user-static (rhbz#2061584)
+
 * Tue May 17 2022 Cole Robinson <crobinso@redhat.com> - 2:6.2.0-10
 - Make qemu-common own /usr/share/qemu/vhost-user (bz 2086836)
 - Add virtiofsd to qemu-system-* deps (bz 2083155)
