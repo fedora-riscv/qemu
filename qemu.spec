@@ -2346,7 +2346,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-aarch64_be-static
 %{_datadir}/systemtap/tapset/qemu-aarch64.stp
 %{_datadir}/systemtap/tapset/qemu-aarch64_be-static.stp
-%ifnarch aarch64
+%ifnarch aarch64 armv7hl
 %{_exec_prefix}/lib/binfmt.d/qemu-aarch64-static.conf
 %endif
 %{_exec_prefix}/lib/binfmt.d/qemu-aarch64_be-static.conf
@@ -2360,7 +2360,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-arm-static
 %{_bindir}/qemu-armeb-static
 %{_datadir}/systemtap/tapset/qemu-armeb-static.stp
-%ifnarch aarch64
+%ifnarch aarch64 armv7hl
 %{_exec_prefix}/lib/binfmt.d/qemu-arm-static.conf
 %endif
 %{_exec_prefix}/lib/binfmt.d/qemu-armeb-static.conf
