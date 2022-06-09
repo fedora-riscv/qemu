@@ -287,7 +287,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
 Version: 6.1.0
-Release: 14%{?rcrel}%{?dist}
+Release: 15%{?rcrel}%{?dist}
 Epoch: 2
 License: GPLv2 and BSD and MIT and CC-BY
 URL: http://www.qemu.org/
@@ -329,6 +329,9 @@ Patch7: 0001-block-introduce-max_hw_iov-for-use-in-scsi-generic.patch
 # CVE-2022-0358
 # https://bugzilla.redhat.com/show_bug.cgi?id=2046202
 Patch8: 0001-virtiofsd-Drop-membership-of-all-supplementary-groups.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1984401
+Patch9: 0001-virtio-balloon-Fix-page-poison-subsection-name.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2265,6 +2268,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Thu Jun 09 2022 Eduardo Lima (Etrunko) <etrunko@redhat.com> - 6.1.0-15
+- virtio-balloon: Fix page-poison subsection name
+
 * Wed Feb 09 2022 Eduardo Lima (Etrunko) <etrunko@redhat.com> - 6.1.0-14
 - virtiofsd: Drop membership of all supplementary groups (CVE-2022-0358)
   Resolves: rhbz#2044863
