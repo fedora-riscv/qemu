@@ -81,7 +81,7 @@
 # Matches xen ExclusiveArch
 %global have_xen 0
 %if 0%{?fedora}
-%ifarch %{ix86} x86_64 armv7hl aarch64
+%ifarch x86_64 aarch64
 %global have_xen 1
 %endif
 %endif
@@ -306,7 +306,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 11
+%global baserelease 12
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -2686,6 +2686,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Sat Jun 11 2022 Cole Robinson <crobinso@redhat.com> - 2:6.2.0-12
+- Adjust for Xen dropping 32bit arches
+
 * Tue Jun 07 2022 Cole Robinson <crobinso@redhat.com> - 2:6.2.0-11
 - Split qemu-user-static into per-arch subpackages (bz 2061584)
 - Drop redundant qemu-trace-stap copy from qemu-user-static (rhbz#2061584)
