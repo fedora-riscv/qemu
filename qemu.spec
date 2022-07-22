@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 6
+%global baserelease 7
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -2716,6 +2716,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 2:7.0.0-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
 * Sat Jun 11 2022 Cole Robinson <crobinso@redhat.com> - 7.0.0-6
 - Adjust for Xen dropping 32bit arches
 
