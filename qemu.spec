@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 7
+%global baserelease 8
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -502,7 +502,7 @@ BuildRequires: SDL2_image-devel
 %endif
 
 %if %{user_static}
-BuildRequires: glibc-static pcre-static glib2-static zlib-static
+BuildRequires: glibc-static pcre2-static glib2-static zlib-static
 %endif
 
 # Requires for the Fedora 'qemu' metapackage
@@ -2716,6 +2716,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Mon Jul 25 2022 Paolo Bonzini <pbonzini@redhat.com> - 2:7.0.0-8
+- Replace pcre-static dependency with pcre2-static, to adjust for glib switching
+
 * Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 2:7.0.0-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
