@@ -341,17 +341,17 @@ Source31: kvm-x86.conf
 Source36: README.tests
 
 # Fix SGX assert
-Patch0001: 0001-target-i386-the-sgx_epc_get_section-stub-is-reachabl.patch
+Patch: 0001-target-i386-the-sgx_epc_get_section-stub-is-reachabl.patch
 # Fix virtio-scsi hang (bz #2079347)
-Patch0002: 0002-virtio-scsi-fix-ctrl-and-event-handler-functions-in-.patch
-Patch0003: 0003-virtio-scsi-don-t-waste-CPU-polling-the-event-virtqu.patch
-Patch0004: 0004-virtio-scsi-clean-up-virtio_scsi_handle_event_vq.patch
-Patch0005: 0005-virtio-scsi-clean-up-virtio_scsi_handle_ctrl_vq.patch
-Patch0006: 0006-virtio-scsi-clean-up-virtio_scsi_handle_cmd_vq.patch
-Patch0007: 0007-virtio-scsi-move-request-related-items-from-.h-to-.c.patch
-Patch0008: 0008-Disable-flakey-dbus-display-test.patch
-Patch0009: 0009-Fix-iotests-with-modules-and-qemu-system-s390x.patch
-Patch0010: 0010-Skip-iotests-entirely.patch
+Patch: 0002-virtio-scsi-fix-ctrl-and-event-handler-functions-in-.patch
+Patch: 0003-virtio-scsi-don-t-waste-CPU-polling-the-event-virtqu.patch
+Patch: 0004-virtio-scsi-clean-up-virtio_scsi_handle_event_vq.patch
+Patch: 0005-virtio-scsi-clean-up-virtio_scsi_handle_ctrl_vq.patch
+Patch: 0006-virtio-scsi-clean-up-virtio_scsi_handle_cmd_vq.patch
+Patch: 0007-virtio-scsi-move-request-related-items-from-.h-to-.c.patch
+Patch: 0008-Disable-flakey-dbus-display-test.patch
+Patch: 0009-Fix-iotests-with-modules-and-qemu-system-s390x.patch
+Patch: 0010-Skip-iotests-entirely.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
