@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 8
+%global baserelease 9
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -352,6 +352,8 @@ Patch: 0007-virtio-scsi-move-request-related-items-from-.h-to-.c.patch
 Patch: 0008-Disable-flakey-dbus-display-test.patch
 Patch: 0009-Fix-iotests-with-modules-and-qemu-system-s390x.patch
 Patch: 0010-Skip-iotests-entirely.patch
+# Not yet upstream, fix glibc 2.36 compat
+Patch: 0011-linux-user-fix-compat-with-glibc-2.36-sys-mount.h.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2716,6 +2718,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue Aug  2 2022 Daniel P. Berrangé <berrange@redhat.com> - 7.0.0-9
+- Fix compat with glibc 2.36 headers
+
 * Mon Jul 25 2022 Paolo Bonzini <pbonzini@redhat.com> - 2:7.0.0-8
 - Replace pcre-static dependency with pcre2-static, to adjust for glib switching
 
