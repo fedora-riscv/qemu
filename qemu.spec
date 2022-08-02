@@ -1554,7 +1554,8 @@ run_configure() {
         --with-git=git \
         --tls-priority=@QEMU,SYSTEM \
         %{disable_everything} \
-        "$@"
+        "$@" \
+    || ( cat config.log ; exit 1 )
 
     echo "config-host.mak contents:"
     echo "==="
@@ -1721,8 +1722,7 @@ run_configure \
   --enable-xen \
   --enable-xen-pci-passthrough \
 %endif
-  --enable-zstd \
-
+  --enable-zstd
 
 %if %{tools_only}
 %make_build qemu-img
