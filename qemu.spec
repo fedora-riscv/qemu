@@ -306,7 +306,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 13
+%global baserelease 14
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -359,8 +359,17 @@ Patch0015: 0015-hw-i386-amd_iommu-Fix-maybe-uninitialized-error-with.patch
 Patch0016: 0016-Update-bios-table-test-blobs-after-bugfix-backports.patch
 
 # vga: avoid crash if no default vga card
-# https://gitlab.com/qemu-project/qemu/-/issues/978
+# https://bugzilla.redhat.com/show_bug.cgi?id=2095639
 Patch0017: 0017-vga-avoid-crash-if-no-default-vga-card.patch
+
+# lsi53c895a: Do not abort when DMA requested and no data queued
+# https://gitlab.com/qemu-project/qemu/-/issues/552
+Patch0018: 0018-hw-scsi-lsi53c895a-Do-not-abort-when-DMA-requested.patch
+Patch0019: 0019-tests-qtest-Add-fuzz-lsi53c895a-test.patch
+
+# lsi53c895a: Fix use-after-free in lsi_do_msgout (CVE-2022-0216)
+# https://bugzilla.redhat.com/show_bug.cgi?id=2070902
+Patch0020: 0020-scsi-lsi53c895a-really-fix-use-after-free-in-lsi.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2689,9 +2698,12 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Fri Aug 12 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-14
+- lsi53c895a: Do not abort when DMA requested and no data queued (#552)
+- lsi53c895a: Fix use-after-free in lsi_do_msgout (CVE-2022-0216) (rhbz#2070902)
+
 * Fri Aug 5 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-13
-- vga: avoid crash if no default vga card
-- Resolves: https://gitlab.com/qemu-project/qemu/-/issues/978
+- vga: avoid crash if no default vga card (rhbz#2095639)
 
 * Sat Jun 11 2022 Cole Robinson <crobinso@redhat.com> - 2:6.2.0-12
 - Adjust for Xen dropping 32bit arches
