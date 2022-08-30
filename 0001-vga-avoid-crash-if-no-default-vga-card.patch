@@ -1,0 +1,33 @@
+From f5818a8cfaf4338cea8bb5059ca06f8fb8672e72 Mon Sep 17 00:00:00 2001
+From: Guo Zhi <qtxuning1999@sjtu.edu.cn>
+Date: Tue, 3 May 2022 17:17:24 +0800
+Subject: [PATCH] vga: avoid crash if no default vga card
+
+QEMU in some arch will crash when executing -vga help command, because
+there is no default vga model.  Add check to this case and avoid crash.
+
+Resolves: https://gitlab.com/qemu-project/qemu/-/issues/978
+
+Signed-off-by: Guo Zhi <qtxuning1999@sjtu.edu.cn>
+Reviewed-by: Thomas Huth <thuth@redhat.com>
+Tested-by: Thomas Huth <thuth@redhat.com>
+Message-Id: <20220503091724.970009-1-qtxuning1999@sjtu.edu.cn>
+Signed-off-by: Laurent Vivier <laurent@vivier.eu>
+---
+ softmmu/vl.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/softmmu/vl.c b/softmmu/vl.c
+index 5ca11e7469..00782818f1 100644
+--- a/softmmu/vl.c
++++ b/softmmu/vl.c
+@@ -945,7 +945,8 @@ static void select_vgahw(const MachineClass *machine_class, const char *p)
+
+             if (vga_interface_available(t) && ti->opt_name) {
+                 printf("%-20s %s%s\n", ti->opt_name, ti->name ?: "",
+-                       g_str_equal(ti->opt_name, def) ? " (default)" : "");
++                        (def && g_str_equal(ti->opt_name, def)) ?
++                        " (default)" : "");
+             }
+         }
+         exit(0);

@@ -287,7 +287,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
 Version: 6.1.0
-Release: 15%{?rcrel}%{?dist}
+Release: 16%{?rcrel}%{?dist}
 Epoch: 2
 License: GPLv2 and BSD and MIT and CC-BY
 URL: http://www.qemu.org/
@@ -332,6 +332,19 @@ Patch8: 0001-virtiofsd-Drop-membership-of-all-supplementary-groups.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1984401
 Patch9: 0001-virtio-balloon-Fix-page-poison-subsection-name.patch
+
+# vga: avoid crash if no default vga card
+# https://bugzilla.redhat.com/show_bug.cgi?id=2095639
+Patch10: 0001-vga-avoid-crash-if-no-default-vga-card.patch
+
+# lsi53c895a: Do not abort when DMA requested and no data queued
+# https://gitlab.com/qemu-project/qemu/-/issues/552
+Patch11: 0001-hw-scsi-lsi53c895a-Do-not-abort-when-DMA-requested.patch
+Patch12: 0001-tests-qtest-Add-fuzz-lsi53c895a-test.patch
+
+# lsi53c895a: Fix use-after-free in lsi_do_msgout (CVE-2022-0216)
+# https://bugzilla.redhat.com/show_bug.cgi?id=2070902
+Patch13: 0001-scsi-lsi53c895a-really-fix-use-after-free-in-lsi_do.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2268,6 +2281,11 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue Aug 30 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 6.1.0-16
+- vga: avoid crash if no default vga card (rhbz#2095639)
+- lsi53c895a: Do not abort when DMA requested and no data queued (#552)
+- lsi53c895a: Fix use-after-free in lsi_do_msgout (CVE-2022-0216) (rhbz#2070902)
+
 * Thu Jun 09 2022 Eduardo Lima (Etrunko) <etrunko@redhat.com> - 6.1.0-15
 - virtio-balloon: Fix page-poison subsection name
 
