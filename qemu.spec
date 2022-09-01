@@ -317,11 +317,11 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 9
+%global baserelease 1
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
-Version: 7.0.0
+Version: 7.1.0
 Release: %{baserelease}%{?rcrel}%{?dist}
 Epoch: 2
 License: GPLv2 and BSD and MIT and CC-BY
@@ -342,18 +342,8 @@ Source36: README.tests
 
 # Fix SGX assert
 Patch: 0001-target-i386-the-sgx_epc_get_section-stub-is-reachabl.patch
-# Fix virtio-scsi hang (bz #2079347)
-Patch: 0002-virtio-scsi-fix-ctrl-and-event-handler-functions-in-.patch
-Patch: 0003-virtio-scsi-don-t-waste-CPU-polling-the-event-virtqu.patch
-Patch: 0004-virtio-scsi-clean-up-virtio_scsi_handle_event_vq.patch
-Patch: 0005-virtio-scsi-clean-up-virtio_scsi_handle_ctrl_vq.patch
-Patch: 0006-virtio-scsi-clean-up-virtio_scsi_handle_cmd_vq.patch
-Patch: 0007-virtio-scsi-move-request-related-items-from-.h-to-.c.patch
-Patch: 0008-Disable-flakey-dbus-display-test.patch
-Patch: 0009-Fix-iotests-with-modules-and-qemu-system-s390x.patch
+Patch: 0001-tests-Disable-pci_virtio_vga-for-ppc64.patch
 Patch: 0010-Skip-iotests-entirely.patch
-# Not yet upstream, fix glibc 2.36 compat
-Patch: 0011-linux-user-fix-compat-with-glibc-2.36-sys-mount.h.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -512,6 +502,11 @@ BuildRequires: pcre-static
 %endif
 %endif
 
+# vfio-user-server
+BuildRequires: pkgconfig(json-c)
+BuildRequires: pkgconfig(cmocka)
+
+
 # Requires for the Fedora 'qemu' metapackage
 Requires: %{name}-user = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-aarch64 = %{epoch}:%{version}-%{release}
@@ -519,6 +514,7 @@ Requires: %{name}-system-alpha = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-arm = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-avr = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-cris = %{epoch}:%{version}-%{release}
+Requires: %{name}-system-loongarch64 = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-m68k = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-microblaze = %{epoch}:%{version}-%{release}
 Requires: %{name}-system-mips = %{epoch}:%{version}-%{release}
@@ -959,6 +955,7 @@ Requires: qemu-user-static-arm
 Requires: qemu-user-static-cris
 Requires: qemu-user-static-hexagon
 Requires: qemu-user-static-hppa
+Requires: qemu-user-static-loongarch64
 Requires: qemu-user-static-m68k
 Requires: qemu-user-static-microblaze
 Requires: qemu-user-static-mips
@@ -1010,6 +1007,12 @@ static binaries
 Summary: QEMU user mode emulation of hppa qemu targets static build
 %description user-static-hppa
 This package provides the hppa user mode emulation of qemu targets built as
+static binaries
+
+%package user-static-loongarch64
+Summary: QEMU user mode emulation of loongarch64 qemu targets static build
+%description user-static-loongarch64
+This package provides the loongarch64 user mode emulation of qemu targets built as
 static binaries
 
 %package user-static-m68k
@@ -1174,6 +1177,20 @@ Summary: QEMU system emulator for hppa
 Requires: %{name}-common = %{epoch}:%{version}-%{release}
 %description system-hppa-core
 This package provides the QEMU system emulator for HPPA.
+
+
+%package system-loongarch64
+Summary: QEMU system emulator for LoongArch (LA64)
+Requires: %{name}-system-loongarch64-core = %{epoch}:%{version}-%{release}
+%{requires_all_modules}
+%description system-loongarch64
+This package provides the QEMU system emulator for Loongson boards.
+
+%package system-loongarch64-core
+Summary: QEMU system emulator for LoongArch (LA64)
+Requires: %{name}-common = %{epoch}:%{version}-%{release}
+%description system-loongarch64-core
+This package provides the QEMU system emulator for Loongson boards.
 
 
 %package system-m68k
@@ -1386,8 +1403,6 @@ Requires: %{name}-common = %{epoch}:%{version}-%{release}
 This package provides the QEMU system emulator for Xtensa boards.
 
 
-
-
 %prep
 %setup -q -n qemu-%{version}%{?rcstr}
 %autosetup -S git_am
@@ -1508,20 +1523,19 @@ mkdir -p %{static_builddir}
   --disable-user                   \\\
   --disable-vde                    \\\
   --disable-vdi                    \\\
+  --disable-vfio-user-server       \\\
   --disable-vhost-crypto           \\\
   --disable-vhost-kernel           \\\
   --disable-vhost-net              \\\
-  --disable-vhost-scsi             \\\
   --disable-vhost-user             \\\
   --disable-vhost-user-blk-server  \\\
   --disable-vhost-vdpa             \\\
-  --disable-vhost-vsock            \\\
   --disable-virglrenderer          \\\
   --disable-virtfs                 \\\
   --disable-virtiofsd              \\\
   --disable-vnc                    \\\
   --disable-vnc-jpeg               \\\
-  --disable-vnc-png                \\\
+  --disable-png                    \\\
   --disable-vnc-sasl               \\\
   --disable-vte                    \\\
   --disable-vvfat                  \\\
@@ -1589,7 +1603,7 @@ run_configure \
 %endif
   --enable-bpf \
   --enable-cap-ng \
-  --enable-capstone=auto \
+  --enable-capstone \
   --enable-coroutine-pool \
   --enable-curl \
 %if %{have_dbus_display}
@@ -1657,9 +1671,8 @@ run_configure \
   --enable-vhost-user \
   --enable-vhost-user-blk-server \
   --enable-vhost-vdpa \
-  --enable-vhost-vsock \
   --enable-vnc \
-  --enable-vnc-png \
+  --enable-png \
   --enable-vnc-sasl \
 %if %{enable_werror}
   --enable-werror \
@@ -1716,8 +1729,8 @@ run_configure \
 %endif
   --enable-usb-redir \
   --enable-vdi \
+  --enable-vfio-user-server \
   --enable-vhost-crypto \
-  --enable-vhost-scsi \
 %if %{have_virgl}
   --enable-virglrenderer \
 %endif
@@ -2039,6 +2052,11 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %postun user-static-hppa
 /bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
 
+%post user-static-loongarch64
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+%postun user-static-loongarch64
+/bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
+
 %post user-static-m68k
 /bin/systemctl --system try-restart systemd-binfmt.service &>/dev/null || :
 %postun user-static-m68k
@@ -2190,6 +2208,8 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 # Fedora specific
 %{_datadir}/applications/qemu.desktop
 %exclude %{_datadir}/%{name}/qemu-nsis.bmp
+%{_libdir}/libvfio-user.so*
+%exclude %{_includedir}/vfio-user/
 %{_libexecdir}/virtfs-proxy-helper
 %{_mandir}/man1/virtfs-proxy-helper.1*
 
@@ -2325,6 +2345,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-cris
 %{_bindir}/qemu-hppa
 %{_bindir}/qemu-hexagon
+%{_bindir}/qemu-loongarch64
 %{_bindir}/qemu-m68k
 %{_bindir}/qemu-microblaze
 %{_bindir}/qemu-microblazeel
@@ -2358,6 +2379,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_datadir}/systemtap/tapset/qemu-cris*.stp
 %{_datadir}/systemtap/tapset/qemu-hppa*.stp
 %{_datadir}/systemtap/tapset/qemu-hexagon*.stp
+%{_datadir}/systemtap/tapset/qemu-loongarch64*.stp
 %{_datadir}/systemtap/tapset/qemu-m68k*.stp
 %{_datadir}/systemtap/tapset/qemu-microblaze*.stp
 %{_datadir}/systemtap/tapset/qemu-mips*.stp
@@ -2415,6 +2437,11 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-hppa-static
 %{_datadir}/systemtap/tapset/qemu-hppa-static.stp
 %{_exec_prefix}/lib/binfmt.d/qemu-hppa-static.conf
+
+%files user-static-loongarch64
+%{_bindir}/qemu-loongarch64-static
+%{_datadir}/systemtap/tapset/qemu-loongarch64-static.stp
+%{_exec_prefix}/lib/binfmt.d/qemu-loongarch64-static.conf
 
 %files user-static-m68k
 %{_bindir}/qemu-m68k-static
@@ -2574,6 +2601,13 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_datadir}/%{name}/hppa-firmware.img
 
 
+%files system-loongarch64
+%files system-loongarch64-core
+%{_bindir}/qemu-system-loongarch64
+%{_datadir}/systemtap/tapset/qemu-system-loongarch64*.stp
+%{_mandir}/man1/qemu-system-loongarch64.1*
+
+
 %files system-m68k
 %files system-m68k-core
 %{_bindir}/qemu-system-m68k
@@ -2723,6 +2757,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Wed Aug 31 2022 Eduardo Lima (Etrunko) <etrunko@redhat.com> - 7.1.0-1
+- Rebase to qemu 7.1.0
+
 * Tue Aug  2 2022 Daniel P. Berrangé <berrange@redhat.com> - 7.0.0-9
 - Fix compat with glibc 2.36 headers
 
