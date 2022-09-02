@@ -502,10 +502,6 @@ BuildRequires: pcre-static
 %endif
 %endif
 
-# vfio-user-server
-BuildRequires: pkgconfig(json-c)
-BuildRequires: pkgconfig(cmocka)
-
 
 # Requires for the Fedora 'qemu' metapackage
 Requires: %{name}-user = %{epoch}:%{version}-%{release}
@@ -1729,7 +1725,6 @@ run_configure \
 %endif
   --enable-usb-redir \
   --enable-vdi \
-  --enable-vfio-user-server \
   --enable-vhost-crypto \
 %if %{have_virgl}
   --enable-virglrenderer \
@@ -2208,8 +2203,6 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 # Fedora specific
 %{_datadir}/applications/qemu.desktop
 %exclude %{_datadir}/%{name}/qemu-nsis.bmp
-%{_libdir}/libvfio-user.so*
-%exclude %{_includedir}/vfio-user/
 %{_libexecdir}/virtfs-proxy-helper
 %{_mandir}/man1/virtfs-proxy-helper.1*
 
