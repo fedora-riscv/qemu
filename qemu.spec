@@ -144,13 +144,6 @@
 %define have_block_nfs 1
 %endif
 
-%define have_capstone_devel 0
-%if 0%{?fedora}
-# capstone-devel is only on Fedora. Use it if it's available, but
-# if not, use the internal qemu submodule copy
-%define have_capstone_devel 1
-%endif
-
 %define have_librdma 1
 %ifarch %{arm}
 %define have_librdma 0
@@ -317,7 +310,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 2
+%global baserelease 3
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -464,10 +457,8 @@ BuildRequires: libcacard-devel
 # virgl 3d support
 BuildRequires: virglrenderer-devel
 %endif
-%if %{have_capstone_devel}
 # preferred disassembler for TCG
 BuildRequires: capstone-devel
-%endif
 # qemu-ga
 BuildRequires: libudev-devel
 # qauth infrastructure
@@ -2750,6 +2741,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+- Thu Sep 08 2022 Davide Cavalca <dcavalca@fedoraproject.org> - 7.1.0-3
+- Unconditionally enable capstone-devel
+
 - Thu Sep 08 2022 Davide Cavalca <dcavalca@fedoraproject.org> - 7.1.0-2
 - Bump required meson version
 
