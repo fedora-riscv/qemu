@@ -6,7 +6,7 @@
 %global libfdt_version 1.6.0
 %global libseccomp_version 2.4.0
 %global libusbx_version 1.0.23
-%global meson_version 0.58.2
+%global meson_version 0.59.3
 %global usbredir_version 0.7.1
 %global ipxe_version 20200823-5.git4bd064de
 
@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 1
+%global baserelease 2
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -2750,6 +2750,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+- Thu Sep 08 2022 Davide Cavalca <dcavalca@fedoraproject.org> - 7.1.0-2
+- Bump required meson version
+
 * Wed Aug 31 2022 Eduardo Lima (Etrunko) <etrunko@redhat.com> - 7.1.0-1
 - Rebase to qemu 7.1.0
 
