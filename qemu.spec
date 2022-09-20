@@ -306,7 +306,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 14
+%global baserelease 15
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -370,6 +370,10 @@ Patch0019: 0019-tests-qtest-Add-fuzz-lsi53c895a-test.patch
 # lsi53c895a: Fix use-after-free in lsi_do_msgout (CVE-2022-0216)
 # https://bugzilla.redhat.com/show_bug.cgi?id=2070902
 Patch0020: 0020-scsi-lsi53c895a-really-fix-use-after-free-in-lsi.patch
+
+# nvme: DMA reentrancy issue leads to use-after-free
+# https://bugzilla.redhat.com/show_bug.cgi?id=2066083
+Patch0021: 0021-hw-nvme-fix-CVE-2021-3929.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2698,6 +2702,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue Sep 20 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-15
+- nvme: Fix DMA reentrancy use-after-free (CVE-2021-3929) (rhbz#2066083)
+
 * Fri Aug 12 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-14
 - lsi53c895a: Do not abort when DMA requested and no data queued (#552)
 - lsi53c895a: Fix use-after-free in lsi_do_msgout (CVE-2022-0216) (rhbz#2070902)
