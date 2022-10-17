@@ -306,7 +306,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 15
+%global baserelease 16
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -374,6 +374,10 @@ Patch0020: 0020-scsi-lsi53c895a-really-fix-use-after-free-in-lsi.patch
 # nvme: DMA reentrancy issue leads to use-after-free
 # https://bugzilla.redhat.com/show_bug.cgi?id=2066083
 Patch0021: 0021-hw-nvme-fix-CVE-2021-3929.patch
+
+# ui/vnc-clipboard: fix integer underflow in vnc_client_cut_text_ext
+# https://bugzilla.redhat.com/show_bug.cgi?id=2129759
+Patch0022: 0022-ui-vnc-clipboard-fix-integer-underflow-in-vnc_client.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2702,6 +2706,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Fri Oct 14 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-16
+- vnc-clipboard: fix integer underflow (CVE-2022-3165) (rhbz#2129759)
+
 * Tue Sep 20 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-15
 - nvme: Fix DMA reentrancy use-after-free (CVE-2021-3929) (rhbz#2066083)
 
