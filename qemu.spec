@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 9
+%global baserelease 10
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -354,6 +354,12 @@ Patch: 0009-Fix-iotests-with-modules-and-qemu-system-s390x.patch
 Patch: 0010-Skip-iotests-entirely.patch
 # Not yet upstream, fix glibc 2.36 compat
 Patch: 0011-linux-user-fix-compat-with-glibc-2.36-sys-mount.h.patch
+# vga: avoid crash if no default vga card (rhbz#2095639)
+Patch: 0012-vga-avoid-crash-if-no-default-vga-card.patch
+# lsi53c895a: fix use-after-free in lsi_do_msgout (CVE-2022-0216)
+Patch: 0013-scsi-lsi53c895a-fix-use-after-free-in-lsi_do_msgout.patch
+# vnc-clipboard: fix integer underflow (CVE-2022-3165)
+Patch: 0014-ui-vnc-clipboard-fix-integer-underflow-in-vnc_client.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2718,6 +2724,11 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue Oct 18 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:7.0.0-10
+- vga: avoid crash if no default vga card (rhbz#2095639)
+- lsi53c895a: fix use-after-free in lsi_do_msgout (CVE-2022-0216) (rhbz#2070902)
+- vnc-clipboard: fix integer underflow (CVE-2022-3165) (rhbz#2129759)
+
 * Tue Aug  2 2022 Daniel P. Berrangé <berrange@redhat.com> - 7.0.0-9
 - Fix compat with glibc 2.36 headers
 
