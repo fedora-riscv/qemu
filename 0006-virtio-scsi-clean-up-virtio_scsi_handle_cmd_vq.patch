@@ -1,7 +1,7 @@
+From 67a97290efc0e89c7c48bba46ed68de35121b9de Mon Sep 17 00:00:00 2001
 From: Stefan Hajnoczi <stefanha@redhat.com>
 Date: Tue, 17 May 2022 09:28:19 +0100
 Subject: [PATCH] virtio-scsi: clean up virtio_scsi_handle_cmd_vq()
-Content-type: text/plain
 
 virtio_scsi_handle_cmd_vq() is only called from hw/scsi/virtio-scsi.c
 now and its return value is no longer used. Remove the function
@@ -64,3 +64,6 @@ index 44dc3b81ec..2497530064 100644
  void virtio_scsi_init_req(VirtIOSCSI *s, VirtQueue *vq, VirtIOSCSIReq *req);
  void virtio_scsi_free_req(VirtIOSCSIReq *req);
  void virtio_scsi_push_event(VirtIOSCSI *s, SCSIDevice *dev,
+-- 
+2.37.0.rc2
+

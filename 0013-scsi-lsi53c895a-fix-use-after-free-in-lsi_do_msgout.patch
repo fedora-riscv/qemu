@@ -1,3 +1,4 @@
+From 754371b1f2f872156dda4cb4aa16b510c142c381 Mon Sep 17 00:00:00 2001
 From: Mauro Matteo Cascella <mcascell@redhat.com>
 Date: Tue, 5 Jul 2022 22:05:43 +0200
 Subject: [PATCH] scsi/lsi53c895a: fix use-after-free in lsi_do_msgout
@@ -39,7 +40,7 @@ index c8773f73f7..ad5f5e5f39 100644
                  scsi_req_cancel(s->current->req);
 +                current_req = NULL;
              }
-
+ 
              /* As the current implemented devices scsi_disk and scsi_generic
 diff --git a/tests/qtest/fuzz-lsi53c895a-test.c b/tests/qtest/fuzz-lsi53c895a-test.c
 index ba5d468970..0f968024c8 100644
@@ -48,7 +49,7 @@ index ba5d468970..0f968024c8 100644
 @@ -8,6 +8,79 @@
  #include "qemu/osdep.h"
  #include "libqos/libqtest.h"
-
+ 
 +/*
 + * This used to trigger a UAF in lsi_do_msgout()
 + * https://gitlab.com/qemu-project/qemu/-/issues/972
@@ -132,5 +133,8 @@ index ba5d468970..0f968024c8 100644
 +        qtest_add_func("fuzz/lsi53c895a/lsi_do_msgout_cancel_req",
 +                       test_lsi_do_msgout_cancel_req);
      }
-
+ 
      return g_test_run();
+-- 
+2.37.0.rc2
+

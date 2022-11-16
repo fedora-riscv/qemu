@@ -1,7 +1,7 @@
+From 5a595325d84fe48fcef921b0810073906ff9284b Mon Sep 17 00:00:00 2001
 From: Stefan Hajnoczi <stefanha@redhat.com>
 Date: Tue, 17 May 2022 09:27:45 +0100
 Subject: [PATCH] virtio-scsi: don't waste CPU polling the event virtqueue
-Content-type: text/plain
 
 The virtio-scsi event virtqueue is not emptied by its handler function.
 This is typical for rx virtqueues where the device uses buffers when
@@ -89,3 +89,6 @@ index b31c4507f5..b62a35fdca 100644
  void virtio_queue_aio_detach_host_notifier(VirtQueue *vq, AioContext *ctx);
  VirtQueue *virtio_vector_first_queue(VirtIODevice *vdev, uint16_t vector);
  VirtQueue *virtio_vector_next_queue(VirtQueue *vq);
+-- 
+2.37.0.rc2
+

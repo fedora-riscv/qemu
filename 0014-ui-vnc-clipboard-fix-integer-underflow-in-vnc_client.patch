@@ -1,3 +1,4 @@
+From effa979582e34687688df36c9a10b33862f2581f Mon Sep 17 00:00:00 2001
 From: Mauro Matteo Cascella <mcascell@redhat.com>
 Date: Sun, 25 Sep 2022 22:45:11 +0200
 Subject: [PATCH] ui/vnc-clipboard: fix integer underflow in
@@ -35,7 +36,7 @@ index 310a873c21..8a2e176b64 100644
                               " which exceeds our limit of 1MB.", dlen);
 @@ -2456,8 +2456,13 @@ static int protocol_client_msg(VncState *vs, uint8_t *data, size_t len)
          }
-
+ 
          if (read_s32(data, 4) < 0) {
 -            vnc_client_cut_text_ext(vs, abs(read_s32(data, 4)),
 -                                    read_u32(data, 8), data + 12);
@@ -49,3 +50,6 @@ index 310a873c21..8a2e176b64 100644
              break;
          }
          vnc_client_cut_text(vs, read_u32(data, 4), data + 8);
+-- 
+2.37.0.rc2
+

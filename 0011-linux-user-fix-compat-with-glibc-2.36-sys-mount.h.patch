@@ -1,4 +1,4 @@
-From a7f14aae85022007a4c77e0792a1abb0509a08eb Mon Sep 17 00:00:00 2001
+From 7605dc625bfd03c4f6bb8daddde909aac3e4badb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 Date: Tue, 2 Aug 2022 12:34:23 -0400
 Subject: [PATCH] linux-user: fix compat with glibc >= 2.36 sys/mount.h
@@ -53,7 +53,7 @@ Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
  2 files changed, 20 insertions(+)
 
 diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index b27a6552aa..52d178afe7 100644
+index f65045efe6..834a86183c 100644
 --- a/linux-user/syscall.c
 +++ b/linux-user/syscall.c
 @@ -95,7 +95,25 @@
@@ -83,10 +83,10 @@ index b27a6552aa..52d178afe7 100644
  #if defined(CONFIG_FIEMAP)
  #include <linux/fiemap.h>
 diff --git a/meson.build b/meson.build
-index 294e9a8f32..30a380752c 100644
+index 861de93c4f..8ca99671ec 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1963,6 +1963,8 @@ config_host_data.set('HAVE_OPTRESET',
+@@ -1686,6 +1686,8 @@ config_host_data.set('HAVE_OPTRESET',
                       cc.has_header_symbol('getopt.h', 'optreset'))
  config_host_data.set('HAVE_IPPROTO_MPTCP',
                       cc.has_header_symbol('netinet/in.h', 'IPPROTO_MPTCP'))
@@ -96,5 +96,5 @@ index 294e9a8f32..30a380752c 100644
  # has_member
  config_host_data.set('HAVE_SIGEV_NOTIFY_THREAD_ID',
 -- 
-2.37.1
+2.37.0.rc2
 

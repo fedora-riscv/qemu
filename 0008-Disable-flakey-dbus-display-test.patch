@@ -1,7 +1,7 @@
+From 7bbf88bfd6b5200926294788386398193afe623f Mon Sep 17 00:00:00 2001
 From: Cole Robinson <crobinso@redhat.com>
 Date: Sat, 4 Jun 2022 20:28:58 -0400
 Subject: [PATCH] Disable flakey dbus-display-test
-Content-type: text/plain
 
 Signed-off-by: Cole Robinson <crobinso@redhat.com>
 ---
@@ -34,3 +34,6 @@ index d25f82bb5a..d085604727 100644
  qtest_executables = {}
  foreach dir : target_dirs
    if not dir.endswith('-softmmu')
+-- 
+2.37.0.rc2
+

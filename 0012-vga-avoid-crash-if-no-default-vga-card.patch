@@ -1,3 +1,4 @@
+From ac42f1e87f4f963836461691be22e39128b4eff2 Mon Sep 17 00:00:00 2001
 From: Guo Zhi <qtxuning1999@sjtu.edu.cn>
 Date: Tue, 3 May 2022 17:17:24 +0800
 Subject: [PATCH] vga: avoid crash if no default vga card
@@ -21,7 +22,7 @@ index 6f646531a0..b16c1c48fa 100644
 --- a/softmmu/vl.c
 +++ b/softmmu/vl.c
 @@ -974,7 +974,8 @@ static void select_vgahw(const MachineClass *machine_class, const char *p)
-
+ 
              if (vga_interface_available(t) && ti->opt_name) {
                  printf("%-20s %s%s\n", ti->opt_name, ti->name ?: "",
 -                       g_str_equal(ti->opt_name, def) ? " (default)" : "");
@@ -30,3 +31,6 @@ index 6f646531a0..b16c1c48fa 100644
              }
          }
          exit(0);
+-- 
+2.37.0.rc2
+

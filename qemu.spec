@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 10
+%global baserelease 11
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -360,6 +360,10 @@ Patch: 0012-vga-avoid-crash-if-no-default-vga-card.patch
 Patch: 0013-scsi-lsi53c895a-fix-use-after-free-in-lsi_do_msgout.patch
 # vnc-clipboard: fix integer underflow (CVE-2022-3165)
 Patch: 0014-ui-vnc-clipboard-fix-integer-underflow-in-vnc_client.patch
+# Fix "failed to set up stack guard page: Cannot allocate memory"
+# https://bugzilla.redhat.com/show_bug.cgi?id=2143006
+Patch: 0015-coroutine-Rename-qemu_coroutine_inc-dec_pool_size.patch
+Patch: 0016-coroutine-Revert-to-constant-batch-size.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2724,6 +2728,10 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Wed Nov 16 2022 Richard W.M. Jones <rjones@redhat.com> - 7.0.0-11
+- Fix "failed to set up stack guard page: Cannot allocate memory"
+  (rhbz#2143006)
+
 * Tue Oct 18 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:7.0.0-10
 - vga: avoid crash if no default vga card (rhbz#2095639)
 - lsi53c895a: fix use-after-free in lsi_do_msgout (CVE-2022-0216) (rhbz#2070902)

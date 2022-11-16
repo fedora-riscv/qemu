@@ -1,7 +1,7 @@
+From 1917ca47ce2234b7d279f16aa7ef1ff165902d1f Mon Sep 17 00:00:00 2001
 From: Cole Robinson <crobinso@redhat.com>
 Date: Sat, 4 Jun 2022 20:29:46 -0400
 Subject: [PATCH] Fix iotests with modules and qemu-system-s390x
-Content-type: text/plain
 
 Signed-off-by: Cole Robinson <crobinso@redhat.com>
 ---
@@ -30,3 +30,6 @@ index 227e0a5be9..97f8e0a15f 100644
                  grep ^name | sed -e 's/^name "//' -e 's/".*$//')
      for device
      do
+-- 
+2.37.0.rc2
+

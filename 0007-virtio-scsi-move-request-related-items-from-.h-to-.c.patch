@@ -1,7 +1,7 @@
+From 8c2d952c608b15e188db90e26b7238d35f5cf289 Mon Sep 17 00:00:00 2001
 From: Stefan Hajnoczi <stefanha@redhat.com>
 Date: Tue, 17 May 2022 09:28:26 +0100
 Subject: [PATCH] virtio-scsi: move request-related items from .h to .c
-Content-type: text/plain
 
 There is no longer a need to expose the request and related APIs in
 virtio-scsi.h since there are no callers outside virtio-scsi.c.
@@ -155,3 +155,6 @@ index 2497530064..abdda2cbd0 100644
  
  void virtio_scsi_dataplane_setup(VirtIOSCSI *s, Error **errp);
  int virtio_scsi_dataplane_start(VirtIODevice *s);
+-- 
+2.37.0.rc2
+

@@ -1,8 +1,8 @@
+From 7a5a6dbbf40f7d2313173573b99dd26069f7e309 Mon Sep 17 00:00:00 2001
 From: Stefan Hajnoczi <stefanha@redhat.com>
 Date: Wed, 27 Apr 2022 15:35:36 +0100
 Subject: [PATCH] virtio-scsi: fix ctrl and event handler functions in
  dataplane mode
-Content-type: text/plain
 
 Commit f34e8d8b8d48d73f36a67b6d5e492ef9784b5012 ("virtio-scsi: prepare
 virtio_scsi_handle_cmd for dataplane") prepared the virtio-scsi cmd
@@ -106,3 +106,6 @@ index 34a968ecfb..417fbc71d6 100644
      virtio_scsi_acquire(s);
      virtio_scsi_handle_event_vq(s, vq);
      virtio_scsi_release(s);
+-- 
+2.37.0.rc2
+
