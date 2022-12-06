@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 11
+%global baserelease 12
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -364,6 +364,14 @@ Patch: 0014-ui-vnc-clipboard-fix-integer-underflow-in-vnc_client.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=2143006
 Patch: 0015-coroutine-Rename-qemu_coroutine_inc-dec_pool_size.patch
 Patch: 0016-coroutine-Revert-to-constant-batch-size.patch
+# hcd-xhci: infinite loop in xhci_ring_chain_length (CVE-2020-14394)
+Patch: 0017-hw-usb-hcd-xhci-Fix-unbounded-loop-in-xhci_ring_chain_length.patch
+# ati-vga: out-of-bounds write in ati_2d_blt (CVE-2021-3638)
+Patch: 0018-hw-display-ati_2d-Fix-buffer-overflow-in-ati_2d_blt.patch
+# acpi erst: memory corruption issues (CVE-2022-4172)
+Patch: 0019-hw-acpi-erst.c-Fix-memory-handling-issues.patch
+# qxl: qxl_phys2virt unsafe address translation (CVE-2022-4144)
+Patch: 0020-hw-display-qxl-Avoid-buffer-overrun-qxl_phys2virt.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2728,6 +2736,12 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue Dec 06 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:7.0.0-12
+- hcd-xhci: infinite loop in xhci_ring_chain_length (CVE-2020-14394) (rhbz#1908050)
+- ati-vga: out-of-bounds write in ati_2d_blt (CVE-2021-3638) (rhbz#1979882)
+- acpi erst: memory corruption issues (CVE-2022-4172) (rhbz#2149106)
+- qxl: qxl_phys2virt unsafe address translation (CVE-2022-4144) (rhbz#2148542)
+
 * Wed Nov 16 2022 Richard W.M. Jones <rjones@redhat.com> - 7.0.0-11
 - Fix "failed to set up stack guard page: Cannot allocate memory"
   (rhbz#2143006)
