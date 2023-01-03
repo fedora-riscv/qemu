@@ -306,7 +306,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 16
+%global baserelease 17
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -378,6 +378,15 @@ Patch0021: 0021-hw-nvme-fix-CVE-2021-3929.patch
 # ui/vnc-clipboard: fix integer underflow in vnc_client_cut_text_ext
 # https://bugzilla.redhat.com/show_bug.cgi?id=2129759
 Patch0022: 0022-ui-vnc-clipboard-fix-integer-underflow-in-vnc_client.patch
+
+# ati-vga: out-of-bounds write in ati_2d_blt (CVE-2021-3638)
+Patch0023: 0023-hw-display-ati_2d-Fix-buffer-overflow-in-ati_2d_blt.patch
+
+# qxl: qxl_phys2virt unsafe address translation (CVE-2022-4144)
+Patch0024: 0024-hw-display-qxl-Avoid-buffer-overrun-qxl_phys2virt.patch
+
+# linux-user: default to -cpu max (rhbz#2121700)
+Patch0025: 0025-linux-user-use-max-instead-of-qemu32-qemu64-by-default.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2706,6 +2715,11 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Tue Jan 3 2023 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-17
+- ati-vga: out-of-bounds write in ati_2d_blt (CVE-2021-3638) (rhbz#1979882)
+- qxl: qxl_phys2virt unsafe address translation (CVE-2022-4144) (rhbz#2148542)
+- linux-user: default to -cpu max (rhbz#2121700)
+
 * Fri Oct 14 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:6.2.0-16
 - vnc-clipboard: fix integer underflow (CVE-2022-3165) (rhbz#2129759)
 
