@@ -1,0 +1,81 @@
+From ea3de64a58f5f157a75280bcddf884c5bda391be Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Date: Fri, 23 Sep 2022 12:04:13 +0100
+Subject: [PATCH 21/21] linux-user: use 'max' instead of 'qemu32' / 'qemu64' by
+ default
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The 'qemu64' CPU model implements the least featureful x86_64 CPU that's
+possible. Historically this hasn't been an issue since it was rare for
+OS distros to build with a higher mandatory CPU baseline.
+
+With RHEL-9, however, the entire distro is built for the x86_64-v2 ABI
+baseline:
+
+  https://developers.redhat.com/blog/2021/01/05/building-red-hat-enterprise-linux-9-for-the-x86-64-v2-microarchitecture-level
+
+It is likely that other distros may take similar steps in the not too
+distant future. For example, it has been suggested for Fedora on a
+number of occasions.
+
+This new baseline is not compatible with the qemu64 CPU model though.
+While it is possible to pass a '-cpu xxx' flag to qemu-x86_64, the
+usage of QEMU doesn't always allow for this. For example, the args
+are typically controlled via binfmt rules that the user has no ability
+to change. This impacts users who are trying to use podman on aarch64
+platforms, to run containers with x86_64 content. There's no arg to
+podman that can be used to change the qemu-x86_64 args, and a non-root
+user of podman can not change binfmt rules without elevating privileges:
+
+  https://github.com/containers/podman/issues/15456#issuecomment-1228210973
+
+Changing to the 'max' CPU model gives 'qemu-x86_64' maximum
+compatibility with binaries it is likely to encounter in the wild,
+and not likely to have a significant downside for existing usage.
+
+Most other architectures already use an 'any' CPU model, which is
+often mapped to 'max' (or similar) already, rather than the oldest
+possible CPU model.
+
+For the sake of consistency the 'i386' architecture is also changed
+from using 'qemu32' to 'max'.
+
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+Reviewed-by: Philippe Mathieu-Daudé <f4bug@amsat.org>
+Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
+Message-Id: <20220923110413.70593-1-berrange@redhat.com>
+Signed-off-by: Laurent Vivier <laurent@vivier.eu>
+---
+ linux-user/i386/target_elf.h   | 2 +-
+ linux-user/x86_64/target_elf.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/linux-user/i386/target_elf.h b/linux-user/i386/target_elf.h
+index 1c6142e..238a9ab 100644
+--- a/linux-user/i386/target_elf.h
++++ b/linux-user/i386/target_elf.h
+@@ -9,6 +9,6 @@
+ #define I386_TARGET_ELF_H
+ static inline const char *cpu_get_model(uint32_t eflags)
+ {
+-    return "qemu32";
++    return "max";
+ }
+ #endif
+diff --git a/linux-user/x86_64/target_elf.h b/linux-user/x86_64/target_elf.h
+index 7b76a90..3f628f8 100644
+--- a/linux-user/x86_64/target_elf.h
++++ b/linux-user/x86_64/target_elf.h
+@@ -9,6 +9,6 @@
+ #define X86_64_TARGET_ELF_H
+ static inline const char *cpu_get_model(uint32_t eflags)
+ {
+-    return "qemu64";
++    return "max";
+ }
+ #endif
+-- 
+2.39.0
+

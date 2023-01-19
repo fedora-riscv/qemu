@@ -317,7 +317,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 12
+%global baserelease 13
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -372,6 +372,8 @@ Patch: 0018-hw-display-ati_2d-Fix-buffer-overflow-in-ati_2d_blt.patch
 Patch: 0019-hw-acpi-erst.c-Fix-memory-handling-issues.patch
 # qxl: qxl_phys2virt unsafe address translation (CVE-2022-4144)
 Patch: 0020-hw-display-qxl-Avoid-buffer-overrun-qxl_phys2virt.patch
+# linux-user: default to -cpu max (rhbz#2121700)
+Patch: 0021-linux-user-use-max-instead-of-qemu32-qemu64-by-default.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2736,6 +2738,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Thu Jan 19 2023 Christophe Fergeau <cfergeau@redhat.com> - 2:7.0.0-13
+- linux-user: default to -cpu max (rhbz#2121700)
+
 * Tue Dec 06 2022 Mauro Matteo Cascella <mcascell@redhat.com> - 2:7.0.0-12
 - hcd-xhci: infinite loop in xhci_ring_chain_length (CVE-2020-14394) (rhbz#1908050)
 - ati-vga: out-of-bounds write in ati_2d_blt (CVE-2021-3638) (rhbz#1979882)
