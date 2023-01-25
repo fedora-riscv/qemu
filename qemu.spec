@@ -322,7 +322,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
 Version: 7.0.0
-Release: %{baserelease}%{?rcrel}%{?dist}
+Release: %{baserelease}%{?rcrel}.rv64%{?dist}
 Epoch: 2
 License: GPLv2 and BSD and MIT and CC-BY
 URL: http://www.qemu.org/
@@ -525,6 +525,9 @@ BuildRequires: SDL2_image-devel
 
 %if %{user_static}
 BuildRequires: glibc-static pcre2-static glib2-static zlib-static
+%ifarch riscv64
+BuildRequires: libatomic-static
+%endif
 %endif
 
 # Requires for the Fedora 'qemu' metapackage
@@ -1985,7 +1988,7 @@ rm -rf %{static_buildroot}
 pushd %{qemu_kvm_build}
 echo "Testing %{name}-build"
 # 2022-06: ppc64le random qtest segfaults with no discernable pattern
-%ifnarch %{power64}
+%ifnarch %{power64} riscv64
 %make_build check
 %endif
 
@@ -2491,8 +2494,8 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %{_bindir}/qemu-riscv64-static
 %{_datadir}/systemtap/tapset/qemu-riscv32-static.stp
 %{_datadir}/systemtap/tapset/qemu-riscv64-static.stp
-%{_exec_prefix}/lib/binfmt.d/qemu-riscv32-static.conf
 %ifnarch riscv64
+%{_exec_prefix}/lib/binfmt.d/qemu-riscv32-static.conf
 %{_exec_prefix}/lib/binfmt.d/qemu-riscv64-static.conf
 %endif
 
@@ -2738,6 +2741,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Wed Jan 25 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 2:7.0.0-13.rv64
+- Fix build on riscv64.
+
 * Thu Jan 19 2023 Christophe Fergeau <cfergeau@redhat.com> - 2:7.0.0-13
 - linux-user: default to -cpu max (rhbz#2121700)
 
