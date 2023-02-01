@@ -312,7 +312,7 @@ Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 5
+%global baserelease 6
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
