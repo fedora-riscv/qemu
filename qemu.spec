@@ -2011,8 +2011,10 @@ rm -rf %{static_buildroot}
 
 pushd %{qemu_kvm_build}
 echo "Testing %{name}-build"
+# i686: we propose to drop qemu, for now just disable the tests, see:
+# https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/thread/C2U5RBADZB2ZUMR74PLNV73C3AIPSLWH/
 # 2022-06: ppc64le random qtest segfaults with no discernable pattern
-%ifnarch %{power64}
+%ifnarch %{ix86} %{power64}
 %make_build check
 %endif
 
@@ -2791,6 +2793,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 * Mon Feb 27 2023 Richard W.M. Jones <rjones@redhat.com> - 7.2.0-7
 - Fix virtio-blk-pci detect-zeroes=unmap (RHBZ#2173357)
 - Fix build with glib2 2.75.3 (RHBZ#2173639)
+- Disable the tests on i686
 
 * Tue Jan 31 2023 Stefan Hajnoczi <stefanha@redhat.com> - 7.2.0-6
 - Enable libblkio
