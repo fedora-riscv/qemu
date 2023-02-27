@@ -1,7 +1,7 @@
-From ebff02a43374c1138d4f8b2c07d2088a3921c288 Mon Sep 17 00:00:00 2001
+From 5c1d2f920c14d6e8f4ac7abc62714eadaa60f228 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 Date: Tue, 10 Jan 2023 12:37:14 -0500
-Subject: [PATCH 1/2] Revert "linux-user: add more compat ioctl definitions"
+Subject: [PATCH 3/5] Revert "linux-user: add more compat ioctl definitions"
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -27,7 +27,7 @@ Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
  1 file changed, 25 deletions(-)
 
 diff --git a/linux-user/syscall.c b/linux-user/syscall.c
-index 1f8c10f8ef..9c1e9555e1 100644
+index 24b25759be..10af5e0d8e 100644
 --- a/linux-user/syscall.c
 +++ b/linux-user/syscall.c
 @@ -111,31 +111,6 @@
@@ -63,5 +63,5 @@ index 1f8c10f8ef..9c1e9555e1 100644
  #include <linux/fs.h>
  #endif
 -- 
-2.38.1
+2.37.3
 
