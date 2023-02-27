@@ -1,7 +1,7 @@
 From 5c1d2f920c14d6e8f4ac7abc62714eadaa60f228 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 Date: Tue, 10 Jan 2023 12:37:14 -0500
-Subject: [PATCH 3/5] Revert "linux-user: add more compat ioctl definitions"
+Subject: [PATCH 3/6] Revert "linux-user: add more compat ioctl definitions"
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

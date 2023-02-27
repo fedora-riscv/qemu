@@ -1,7 +1,7 @@
 From db788c896eb1378ebc1f20dcc4954616a7631919 Mon Sep 17 00:00:00 2001
 From: Stefan Hajnoczi <stefanha@redhat.com>
 Date: Tue, 7 Feb 2023 15:37:16 -0500
-Subject: [PATCH 5/5] block: fix detect-zeroes= with BDRV_REQ_REGISTERED_BUF
+Subject: [PATCH 5/6] block: fix detect-zeroes= with BDRV_REQ_REGISTERED_BUF
 
 When a write request is converted into a write zeroes request by the
 detect-zeroes= feature, it is no longer associated with an I/O buffer.

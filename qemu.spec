@@ -352,6 +352,11 @@ Patch: 0003-Revert-linux-user-add-more-compat-ioctl-definitions.patch
 Patch: 0004-Revert-linux-user-fix-compat-with-glibc-2.36-sys-mou.patch
 # Fix virtio-blk-pci detect-zeroes=unmap (RHBZ#2173357)
 Patch: 0005-block-fix-detect-zeroes-with-BDRV_REQ_REGISTERED_BUF.patch
+# Fix build with glib2 2.75.3
+# https://bugzilla.redhat.com/show_bug.cgi?id=2173639
+# https://gitlab.com/qemu-project/qemu/-/issues/1518
+# Patch is NOT UPSTREAM.
+Patch: 0006-PATCH-test-vmstate-fix-bad-GTree-usage-use-after-fre.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
@@ -2783,6 +2788,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %changelog
 * Mon Feb 27 2023 Richard W.M. Jones <rjones@redhat.com> - 7.2.0-7
 - Fix virtio-blk-pci detect-zeroes=unmap (RHBZ#2173357)
+- Fix build with glib2 2.75.3 (RHBZ#2173639)
 
 * Tue Jan 31 2023 Stefan Hajnoczi <stefanha@redhat.com> - 7.2.0-6
 - Enable libblkio

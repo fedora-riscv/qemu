@@ -1,7 +1,7 @@
 From b40cf0a490c28d5b79e05382d061983b92a7b2b3 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 Date: Tue, 10 Jan 2023 12:37:25 -0500
-Subject: [PATCH 4/5] Revert "linux-user: fix compat with glibc >= 2.36
+Subject: [PATCH 4/6] Revert "linux-user: fix compat with glibc >= 2.36
  sys/mount.h"
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
