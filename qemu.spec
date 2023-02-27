@@ -357,6 +357,8 @@ Patch: 0005-block-fix-detect-zeroes-with-BDRV_REQ_REGISTERED_BUF.patch
 # https://gitlab.com/qemu-project/qemu/-/issues/1518
 # Patch is NOT UPSTREAM.
 Patch: 0006-PATCH-test-vmstate-fix-bad-GTree-usage-use-after-fre.patch
+# Fix one of the tests.  Sent upstream 2023-02-27.
+Patch: 0007-tests-Ensure-TAP-version-is-printed-before-other-mes.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel

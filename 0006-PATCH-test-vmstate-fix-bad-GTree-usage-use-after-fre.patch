@@ -1,7 +1,7 @@
 From 930def8769940600dd7dd587ec2accd4a8b6e1f8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>
 Date: Mon, 27 Feb 2023 16:02:51 +0000
-Subject: [PATCH 6/6] [PATCH] test-vmstate: fix bad GTree usage, use-after-free
+Subject: [PATCH 6/7] [PATCH] test-vmstate: fix bad GTree usage, use-after-free
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
