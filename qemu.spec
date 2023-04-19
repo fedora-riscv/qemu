@@ -360,10 +360,6 @@ Patch: 0006-PATCH-test-vmstate-fix-bad-GTree-usage-use-after-fre.patch
 # Fix one of the tests.  Sent upstream 2023-02-27.
 Patch: 0007-tests-Ensure-TAP-version-is-printed-before-other-mes.patch
 
-# vfio-user fixes for i386 and ppc64le
-Patch: 0001-fix-compilation-on-i386-and-ppc64.patch
-
-
 BuildRequires: meson >= %{meson_version}
 BuildRequires: zlib-devel
 BuildRequires: glib2-devel
@@ -521,10 +517,6 @@ BuildRequires: pcre2-static
 BuildRequires: pcre-static
 %endif
 %endif
-
-# vfio-user-server
-BuildRequires: pkgconfig(json-c)
-BuildRequires: pkgconfig(cmocka)
 
 
 # Requires for the Fedora 'qemu' metapackage
@@ -1767,7 +1759,6 @@ run_configure \
 %endif
   --enable-usb-redir \
   --enable-vdi \
-  --enable-vfio-user-server \
   --enable-vhost-crypto \
 %if %{have_virgl}
   --enable-virglrenderer \
@@ -2246,8 +2237,6 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 # Fedora specific
 %{_datadir}/applications/qemu.desktop
 %exclude %{_datadir}/%{name}/qemu-nsis.bmp
-%{_libdir}/libvfio-user.so*
-%exclude %{_includedir}/vfio-user/
 %{_libexecdir}/virtfs-proxy-helper
 %{_mandir}/man1/virtfs-proxy-helper.1*
 
