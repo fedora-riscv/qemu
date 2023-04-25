@@ -1718,14 +1718,12 @@ run_configure \
 %if %{have_block_nfs}
   --enable-libnfs \
 %endif
-  --enable-libudev \
 %if %{have_liburing}
   --enable-linux-io-uring \
 %endif
   --enable-linux-user \
   --enable-live-block-migration \
   --enable-multiprocess \
-  --enable-vnc-jpeg \
   --enable-parallels \
 %if %{have_librdma}
   --enable-pvrdma \
@@ -1745,7 +1743,6 @@ run_configure \
   --enable-spice \
   --enable-spice-protocol \
 %endif
-  --enable-usb-redir \
   --enable-vdi \
   --enable-vhost-crypto \
 %if %{have_virgl}
