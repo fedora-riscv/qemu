@@ -305,7 +305,6 @@
 %global obsoletes_some_modules \
 %{obsoletes_block_gluster} \
 %{obsoletes_block_rbd} \
-%{obsoletes_block_rbd} \
 Obsoletes: %{name}-system-lm32 <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-lm32-core <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-moxie <= %{epoch}:%{version}-%{release} \
