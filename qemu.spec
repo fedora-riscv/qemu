@@ -319,7 +319,8 @@ Obsoletes: %{name}-system-lm32-core <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-moxie <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-moxie-core <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-unicore32 <= %{epoch}:%{version}-%{release} \
-Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release}
+Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release} \
+Obsoletes: sgabios <= 1:0.20180715git-10.fc38
 
 # Release candidate version tracking
 # global rcver rc4
