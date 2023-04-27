@@ -163,7 +163,7 @@
 # https://bugzilla.redhat.com/show_bug.cgi?id=1952483
 %global _lto_cflags %{nil}
 
-%global firmwaredirs "%{_datadir}/qemu-firmware:%{_datadir}/ipxe/qemu:%{_datadir}/seavgabios:%{_datadir}/seabios:%{_datadir}/sgabios"
+%global firmwaredirs "%{_datadir}/qemu-firmware:%{_datadir}/ipxe/qemu:%{_datadir}/seavgabios:%{_datadir}/seabios"
 
 %global qemudocdir %{_docdir}/%{name}
 %define evr %{epoch}:%{version}-%{release}
@@ -320,7 +320,7 @@ Obsoletes: %{name}-system-moxie <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-moxie-core <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-unicore32 <= %{epoch}:%{version}-%{release} \
 Obsoletes: %{name}-system-unicore32-core <= %{epoch}:%{version}-%{release} \
-Obsoletes: sgabios <= 1:0.20180715git-10.fc38
+Obsoletes: sgabios-bin <= 1:0.20180715git-10.fc38
 
 # Release candidate version tracking
 # global rcver rc4
@@ -1400,7 +1400,6 @@ platform.
 Summary: QEMU system emulator for x86
 Requires: %{name}-common = %{epoch}:%{version}-%{release}
 Requires: seabios-bin
-Requires: sgabios-bin
 Requires: seavgabios-bin
 %if %{have_edk2}
 Requires: edk2-ovmf
@@ -1935,8 +1934,6 @@ rm -rf %{buildroot}%{_datadir}/%{name}/efi*rom
 rm -rf %{buildroot}%{_datadir}/%{name}/vgabios*bin
 # Provided by package seabios
 rm -rf %{buildroot}%{_datadir}/%{name}/bios*.bin
-# Provided by package sgabios
-rm -rf %{buildroot}%{_datadir}/%{name}/sgabios.bin
 # Provided by edk2
 rm -rf %{buildroot}%{_datadir}/%{name}/edk2*
 rm -rf %{buildroot}%{_datadir}/%{name}/firmware
