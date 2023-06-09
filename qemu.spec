@@ -747,7 +747,7 @@ This package provides the additional OSS audio driver for QEMU.
 Summary: QEMU PulseAudio audio driver
 Requires: %{name}-common%{?_isa} = %{epoch}:%{version}-%{release}
 %description audio-pa
-This package provides the additional PulseAudi audio driver for QEMU.
+This package provides the additional PulseAudio audio driver for QEMU.
 
 %package  audio-sdl
 Summary: QEMU SDL audio driver
