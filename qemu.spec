@@ -357,6 +357,7 @@ Source36: README.tests
 # Fix SGX assert
 Patch: 0001-target-i386-the-sgx_epc_get_section-stub-is-reachabl.patch
 Patch: 0002-hw-pci-bridge-Make-PCIe-and-CXL-PXB-Devices-inherit-.patch
+Patch: 0001-pc-bios-keymaps-Use-the-official-xkb-name-for-Arabic.patch
 
 BuildRequires: meson >= %{meson_version}
 BuildRequires: bison
@@ -2785,6 +2786,7 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 %changelog
 * Mon Jul 03 2023 Camilla Conte <cconte@redhat.com> - 2:8.0.2-1
 - New upstream release 8.0.2
+- Fix arabic keyboard layout name
 
 * Thu Jun 01 2023 Richard W.M. Jones <rjones@redhat.com> - 2:8.0.0-4
 - Rebuild for libnfs soname bump
