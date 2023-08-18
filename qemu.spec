@@ -219,7 +219,11 @@
 %define requires_device_display_virtio_vga_gl Requires: %{name}-device-display-virtio-vga-gl = %{evr}
 %define requires_package_qemu_pr_helper Requires: qemu-pr-helper
 %ifnarch %{ix86}
+%if 0%{?fedora} || 0%{?rhel} > 9
 %define requires_package_virtiofsd Requires: vhostuser-backend(fs)
+%else
+%define requires_package_virtiofsd Requires: virtiofsd
+%endif
 %define obsoletes_package_virtiofsd %{nil}
 %else
 %define requires_package_virtiofsd %{nil}
@@ -333,7 +337,7 @@ Obsoletes: sgabios-bin <= 1:0.20180715git-10.fc38
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 0.1
+%global baserelease 0.2
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -2803,6 +2807,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Mon Aug 21 2023 Davide Cavalca <dcavalca@fedoraproject.org> - 8.1.0-0.2-rc4
+- Adjust virtiofsd requires for el9 and older
+
 * Sun Aug 20 2023 Cole Robinson <crobinso@redhat.com> - 8.1.0-0.1-rc4
 - Rebase to qemu 8.1.0-rc4
 
