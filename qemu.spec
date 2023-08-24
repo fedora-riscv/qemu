@@ -378,7 +378,6 @@ BuildRequires: libusbx-devel >= %{libusbx_version}
 %if %{have_usbredir}
 BuildRequires: usbredir-devel >= %{usbredir_version}
 %endif
-BuildRequires: texinfo
 BuildRequires: python3-sphinx
 BuildRequires: python3-sphinx_rtd_theme
 BuildRequires: libseccomp-devel >= %{libseccomp_version}
