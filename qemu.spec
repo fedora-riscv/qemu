@@ -337,7 +337,7 @@ Obsoletes: sgabios-bin <= 1:0.20180715git-10.fc38
 %endif
 
 # To prevent rpmdev-bumpspec breakage
-%global baserelease 1
+%global baserelease 2
 
 Summary: QEMU is a FAST! processor emulator
 Name: qemu
@@ -578,6 +578,7 @@ This package provides documentation and auxiliary programs used with %{name}.
 
 %package docs
 Summary: %{name} documentation
+BuildArch: noarch
 %description docs
 %{name}-docs provides documentation files regarding %{name}.
 
@@ -2806,6 +2807,9 @@ useradd -r -u 107 -g qemu -G kvm -d / -s /sbin/nologin \
 
 
 %changelog
+* Thu Aug 24 2023 Cole Robinson <crobinso@redhat.com> - 8.1.0-2
+- Make qemu-docs noarch
+
 * Wed Aug 23 2023 Cole Robinson <crobinso@redhat.com> - 8.1.0-1
 - Rebase to qemu 8.1.0 GA
 
